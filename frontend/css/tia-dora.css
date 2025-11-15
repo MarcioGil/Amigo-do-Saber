@@ -32,7 +32,33 @@
   padding: 0 var(--spacing-md);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.tia-dora-avatar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.tia-dora-avatar {
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  border: 3px solid #764ba2;
+  background: #fff5f8;
+}
+
+.tia-dora-desc {
+  margin-top: 0.5rem;
+  background: #fff5f8;
+  color: #3c2a1e;
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: 1.1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  max-width: 500px;
 }
 
 .back-link {
