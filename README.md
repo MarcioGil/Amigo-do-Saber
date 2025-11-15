@@ -1,3 +1,12 @@
+# ✨ Melhorias Recentes (Nov/2025)
+
+- Tia Dora agora é representada como uma mulher preta, trazendo mais inclusão e identificação para as crianças.
+- Novo avatar ilustrativo adicionado ao frontend (`frontend/img/tia-dora-avatar.svg`).
+- Texto de apresentação da Tia Dora atualizado para reforçar acolhimento e representatividade.
+- Estilos visuais do chat ajustados para destacar o avatar e garantir acessibilidade.
+- Automação do deploy do frontend via Azure Storage Static Website.
+- Correção e validação do arquivo `staticwebapp.config.json`.
+- Checklist de deploy atualizado e CI/CD validado.
 # 🎓 Amigo do Saber
 
 **Plataforma educacional gratuita para reforço escolar personalizado na Baixada**
@@ -77,6 +86,7 @@ Democratizar o acesso à educação de qualidade, oferecendo reforço escolar pe
 - **IA**: Azure OpenAI + Azure AI Language + Translator
 - **Autenticação**: Azure AD B2C
 - **Hospedagem**: Azure Static Web Apps
+**Hospedagem**: Azure Storage Static Website (frontend) + Azure Functions (backend)
 - **CI/CD**: GitHub Actions
 - **Analytics**: Power BI Desktop
 
@@ -247,7 +257,8 @@ Amigo-do-Saber/
 ## 🤖 Tia Dora - Professora Virtual
 
 ### Características
-- **Persona**: Carinhosa, paciente e didática
+- **Persona**: Mulher preta, carinhosa, paciente e didática, inspirada na representatividade familiar brasileira
+- **Visual**: Novo avatar ilustrativo no frontend, reforçando inclusão e acolhimento
 - **Tom**: Amigável para crianças 6-14 anos
 - **Método**: Exemplos do cotidiano (pizza para frações!)
 - **Limite**: 50 perguntas/hora por aluno
