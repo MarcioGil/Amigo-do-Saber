@@ -1,3 +1,23 @@
+# 🖥️ Como acessar localmente
+
+Se o deploy não funcionar, você pode apresentar o app localmente:
+
+1. Instale o Node.js (https://nodejs.org/)
+2. No terminal, execute:
+  ```powershell
+  cd frontend
+  npx http-server -p 8081
+  ```
+3. Acesse no navegador: http://localhost:8081
+4. Para ver a Tia Dora: http://localhost:8081/tia-dora.html
+
+## Login demo para apresentação
+
+Use estes dados na tela de login:
+- **Usuário:** demo@amigo.com
+- **Senha:** Demo123!
+
+Assim você pode navegar e mostrar todas as funcionalidades do app mesmo sem deploy online.
 # ✨ Melhorias Recentes (Nov/2025)
 
 - Tia Dora agora é representada como uma mulher preta, trazendo mais inclusão e identificação para as crianças.
@@ -99,6 +119,17 @@ Democratizar o acesso à educação de qualidade, oferecendo reforço escolar pe
 
 ### Extensões VS Code (Instalar)
 
+# ✨ Resumo das Melhorias de Hoje (15/11/2025)
+
+- Tia Dora agora é representada como uma mulher preta, com avatar ilustrativo e texto acolhedor.
+- Menu horizontal estilizado e acessível adicionado ao topo das páginas principais, com links funcionais.
+- Links do menu corrigidos para navegação entre Início, Tia Dora, Jogos, Área do Aluno e Login.
+- Estilos visuais do chat e menu ajustados para acessibilidade e responsividade.
+- Instruções de acesso local ao app incluídas no README.
+- Login demo criado para facilitar testes e apresentação.
+- Correção e validação do arquivo `staticwebapp.config.json`.
+- Checklist de deploy atualizado e CI/CD validado.
+- Automação do deploy do frontend via Azure Storage Static Website.
 ```bash
 # Abra o VS Code e instale:
 - Azure Tools (ms-vscode.vscode-node-azure-pack)
@@ -116,8 +147,6 @@ Democratizar o acesso à educação de qualidade, oferecendo reforço escolar pe
 # 1. Clone o repositório
 git clone https://github.com/SEU_USUARIO/Amigo-do-Saber.git
 cd Amigo-do-Saber
-
-# 2. Execute o script de setup (cria todos os recursos no Azure)
 .\scripts\setup-azure.ps1
 
 # 3. Faça o deploy

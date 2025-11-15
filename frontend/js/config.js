@@ -7,7 +7,7 @@ const CONFIG = {
   API_BASE_URL:
     window.location.hostname === "localhost"
       ? "http://localhost:7071/api"
-      : "https://amigo-do-saber-api.azurewebsites.net/api",
+      : "https://marciogil-funcapp-avaah5fcbwawc3f3.centralus-01.azurewebsites.net/api",
 
   // Azure AD B2C (será configurado na implementação)
   AUTH: {

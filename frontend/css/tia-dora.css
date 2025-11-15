@@ -1,3 +1,33 @@
+/* Menu Horizontal */
+.main-menu {
+  width: 100%;
+  background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  margin-bottom: 0.5rem;
+}
+.main-menu ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+.main-menu a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.main-menu a:hover, .main-menu a[aria-current="page"] {
+  background: #fff5f8;
+  color: #764ba2;
+}
 /* ==============================================
    TIA DORA CHAT - Estilos
    ============================================== */

@@ -1,0 +1,20 @@
+name: Deploy Frontend to Azure Storage
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Upload frontend to Azure Storage
+        uses: azure/cli@v1
+        with:
+          inlineScript: |
+            az storage blob upload-batch -d '$web' -s ./frontend --account-name amigodosaberstorage --auth-mode key --account-key ${{ secrets.AZURE_STORAGE_KEY }}

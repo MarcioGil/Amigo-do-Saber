@@ -5,98 +5,100 @@ Use este checklist para garantir que todos os passos do deploy foram executados 
 ## 📋 Pré-Deploy
 
 ### Ambiente Local
-
-- [ ] Azure CLI instalado e funcionando
-- [ ] Node.js 18+ instalado
-- [ ] Git configurado
-- [ ] VS Code instalado (opcional, mas recomendado)
-- [ ] Conta no Azure ativa
+ [x] Azure CLI instalado e funcionando
+ [x] Node.js 18+ instalado
+ [x] Git configurado
+ [x] VS Code instalado (opcional, mas recomendado)
+ [x] Conta no Azure ativa
+ [x] Conta no GitHub ativa
 - [ ] Conta no GitHub ativa
 
 ### Repositório
-
-- [ ] Código clonado localmente
-- [ ] Repositório criado no GitHub
-- [ ] Branch `main` como padrão
+ [x] Código clonado localmente
+ [x] Repositório criado no GitHub
+ [x] Branch `main` como padrão
+ [x] README.md revisado
 - [ ] README.md revisado
 
 ## 🔧 Setup Azure
-
-### Resource Group
-
-- [ ] Resource Group criado: `amigo-do-saber-rg`
-- [ ] Região: `brazilsouth` (São Paulo)
 
 ### Cosmos DB
 
 - [ ] Conta Cosmos DB criada: `amigo-do-saber-db`
 - [ ] Free Tier habilitado
 - [ ] Database criado: `amigo-saber-data`
+ [x] Storage Account criado
+ [x] Function App criado: `amigo-do-saber-api`
+ [x] Runtime: Node.js 18
+ [x] Região: `brazilsouth`
+ [x] Variáveis de ambiente configuradas:
+   - [x] `COSMOS_ENDPOINT`
+   - [x] `COSMOS_KEY`
+   - [x] `OPENAI_API_KEY`
+   - [x] `OPENAI_ENDPOINT`
+   - [x] `OPENAI_DEPLOYMENT_NAME`
+   - [x] `JWT_SECRET`
 - [ ] Container `Alunos` criado (partition key: `/id`)
 - [ ] Container `Progresso` criado (partition key: `/alunoId`)
 - [ ] Container `Gamificacao` criado (partition key: `/alunoId`)
-- [ ] Container `LogsDeUso` criado (partition key: `/alunoId`)
-- [ ] Connection string copiada e guardada
-- [ ] Primary key copiada e guardada
-
-### Azure OpenAI
-
+ [x] Static Web App publicado via Storage: `amigodosaberstorage`
+ [x] Região: `eastus`
+ [ ] Conectado ao repositório GitHub
+ [ ] Branch: `main`
+ [ ] App location: `/frontend`
+ [ ] Deployment token copiado
 - [ ] Serviço OpenAI criado: `amigo-do-saber-openai`
 - [ ] Região: `eastus` (OpenAI não disponível em Brazil)
 - [ ] Modelo GPT-4 deployado
-- [ ] Deployment name: `gpt-4`
-- [ ] API key copiada e guardada
-- [ ] Endpoint copiado e guardado
-
-### Azure Functions
+ [x] Arquivo `backend/local.settings.json` criado
+ [x] Todas as variáveis de ambiente preenchidas
+ [x] `npm install` executado em `backend/`
+ [x] `func start` executa sem erros
+ [x] Endpoints acessíveis em `http://localhost:7071/api`
 
 - [ ] Storage Account criado
 - [ ] Function App criado: `amigo-do-saber-api`
-- [ ] Runtime: Node.js 18
-- [ ] Região: `brazilsouth`
-- [ ] Variáveis de ambiente configuradas:
+ [x] Arquivo `frontend/js/config.js` atualizado com URL da API
+ [x] Frontend abre sem erros no navegador
+ [x] Console não mostra erros críticos
   - [ ] `COSMOS_ENDPOINT`
   - [ ] `COSMOS_KEY`
   - [ ] `OPENAI_API_KEY`
-  - [ ] `OPENAI_ENDPOINT`
-  - [ ] `OPENAI_DEPLOYMENT_NAME`
-  - [ ] `JWT_SECRET`
+ [x] Arquivo `.gitignore` configurado
+ [x] `local.settings.json` NÃO commitado (verificar!)
+ [x] Secrets NÃO commitados (verificar!)
 
 ### Azure Static Web Apps
 
-- [ ] Static Web App criado: `amigo-do-saber`
-- [ ] Região: `brazilsouth`
-- [ ] Conectado ao repositório GitHub
-- [ ] Branch: `main`
-- [ ] App location: `/frontend`
-- [ ] Deployment token copiado
+ [x] `func azure functionapp publish amigo-do-saber-api` executado
+ [x] Deploy concluído sem erros
+ [x] Endpoints acessíveis em `https://amigo-do-saber-api.azurewebsites.net/api`
+ [x] Teste de endpoint de cadastro bem-sucedido
+ [x] Teste de endpoint de Tia Dora bem-sucedido
+ [x] Logs não mostram erros críticos
 
 ## 📝 Configuração Local
 
-### Backend
-
-- [ ] Arquivo `backend/local.settings.json` criado
-- [ ] Todas as variáveis de ambiente preenchidas
-- [ ] `npm install` executado em `backend/`
-- [ ] `func start` executa sem erros
+ [x] Frontend publicado via Storage
+ [x] Frontend acessível em `https://amigodosaberstorage.z24.web.core.windows.net/`
 - [ ] Endpoints acessíveis em `http://localhost:7071/api`
 
 ### Frontend
-
-- [ ] Arquivo `frontend/js/config.js` atualizado com URL da API
-- [ ] Frontend abre sem erros no navegador
+ [x] CORS configurado na Function App
+ [x] Origem permitida: `https://amigodosaberstorage.z24.web.core.windows.net`
+ [x] Teste de requisição do frontend para backend bem-sucedido
 - [ ] Console não mostra erros críticos
 
 ### Git
-
-- [ ] Arquivo `.gitignore` configurado
-- [ ] `local.settings.json` NÃO commitado (verificar!)
-- [ ] Secrets NÃO commitados (verificar!)
-
+ [x] Todos os itens acima foram checados
+ [x] Aplicação está funcionando em produção
+ [x] URLs acessíveis publicamente
+ [ ] Custos dentro do esperado
+ [ ] Documentação completa
 ## 🚀 Deploy
 
 ### Backend (Azure Functions)
-
+Frontend: https://amigodosaberstorage.z24.web.core.windows.net/
 - [ ] `func azure functionapp publish amigo-do-saber-api` executado
 - [ ] Deploy concluído sem erros
 - [ ] Endpoints acessíveis em `https://amigo-do-saber-api.azurewebsites.net/api`
@@ -226,7 +228,7 @@ Use este checklist para garantir que todos os passos do deploy foram executados 
 ### URLs de Produção
 
 ```
-Frontend: https://amigo-do-saber.azurestaticapps.net
+Frontend: https://amigodosaberstorage.z24.web.core.windows.net/
 API: https://amigo-do-saber-api.azurewebsites.net/api
 Portal Azure: https://portal.azure.com
 GitHub: https://github.com/SEU_USUARIO/Amigo-do-Saber
