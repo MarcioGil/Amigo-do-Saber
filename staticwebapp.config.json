@@ -1,0 +1,60 @@
+# Configuração para Azure Static Web Apps
+# Este arquivo é detectado automaticamente pelo GitHub Actions
+
+# Build configuration
+[build]
+  # Não precisamos de build pois o frontend é HTML/CSS/JS puro
+  skip_app_build = true
+
+# Localização dos arquivos
+[build.paths]
+  # Pasta com os arquivos do frontend
+  app_location = "/frontend"
+  
+  # Pasta de saída (mesma do frontend)
+  output_location = "/"
+
+# Configuração de rotas
+[[routes]]
+  route = "/api/*"
+  methods = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+  allowedRoles = ["anonymous"]
+
+[[routes]]
+  route = "/*"
+  serve = "/index.html"
+  statusCode = 200
+
+# Headers de segurança
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "accelerometer=(), camera=(), geolocation=(), microphone=()"
+
+# Cache para assets estáticos
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/games/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Mime types
+[[mimeTypes]]
+  ".json" = "application/json"
+  ".js" = "application/javascript"
+  ".css" = "text/css"
+  ".html" = "text/html"
+  ".svg" = "image/svg+xml"

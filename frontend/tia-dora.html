@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Converse com a Tia Dora - sua professora virtual carinhosa"
+    />
+    <title>Tia Dora 🎀 | Amigo do Saber</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/tia-dora.css" />
+  </head>
+  <body>
+    <!-- Skip Link -->
+    <a href="#chat-container" class="skip-link">Pular para o chat</a>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <a
+            href="index.html"
+            class="back-link"
+            aria-label="Voltar para página inicial"
+          >
+            ← Voltar
+          </a>
+          <h1>
+            <span class="tia-dora-emoji">🎀</span>
+            Tia Dora
+          </h1>
+          <div class="header-status" id="connection-status">
+            <span class="status-indicator online"></span>
+            <span class="status-text">Online</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main id="chat-container" class="chat-container">
+      <div class="container">
+        <!-- Apresentação da Tia Dora -->
+        <div class="tia-dora-intro">
+          <div class="avatar">🎀</div>
+          <div class="intro-text">
+            <h2>Olá, querido! Eu sou a Tia Dora!</h2>
+            <p>
+              Estou aqui para te ajudar com suas lições de casa, tirar suas
+              dúvidas e tornar o aprendizado mais divertido! 💜
+            </p>
+            <p class="intro-tip">
+              <strong>Dica:</strong> Pode me perguntar sobre matemática,
+              português, ciências, história, geografia e inglês!
+            </p>
+          </div>
+        </div>
+
+        <!-- Sugestões Rápidas -->
+        <div class="quick-suggestions" id="quick-suggestions">
+          <p class="suggestions-title">Sugestões para começar:</p>
+          <div class="suggestions-grid">
+            <button
+              class="suggestion-btn"
+              data-question="Tia, pode me ajudar com frações?"
+            >
+              🧮 Ajuda com frações
+            </button>
+            <button
+              class="suggestion-btn"
+              data-question="Como eu aprendo verbos?"
+            >
+              📝 Aprendo verbos
+            </button>
+            <button
+              class="suggestion-btn"
+              data-question="O que é fotossíntese?"
+            >
+              🌱 O que é fotossíntese?
+            </button>
+            <button
+              class="suggestion-btn"
+              data-question="Pode me ensinar tabuada?"
+            >
+              ✖️ Tabuada
+            </button>
+            <button
+              class="suggestion-btn"
+              data-question="Como escrevo um texto legal?"
+            >
+              ✍️ Escrever textos
+            </button>
+            <button
+              class="suggestion-btn"
+              data-question="Inglês é difícil, me ajuda?"
+            >
+              🗣️ Ajuda com inglês
+            </button>
+          </div>
+        </div>
+
+        <!-- Área de Mensagens -->
+        <div
+          class="messages-container"
+          id="messages-container"
+          role="log"
+          aria-live="polite"
+          aria-atomic="false"
+        >
+          <!-- Mensagens serão inseridas aqui via JavaScript -->
+        </div>
+
+        <!-- Indicador de digitação -->
+        <div
+          class="typing-indicator"
+          id="typing-indicator"
+          style="display: none"
+          aria-live="polite"
+        >
+          <div class="avatar-small">🎀</div>
+          <div class="typing-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <span class="sr-only">Tia Dora está digitando...</span>
+        </div>
+
+        <!-- Formulário de Mensagem -->
+        <form class="message-form" id="message-form">
+          <div class="form-content">
+            <label for="message-input" class="sr-only"
+              >Digite sua pergunta para a Tia Dora</label
+            >
+            <textarea
+              id="message-input"
+              name="message"
+              placeholder="Digite sua pergunta aqui..."
+              rows="2"
+              maxlength="500"
+              required
+              aria-describedby="char-counter"
+            ></textarea>
+
+            <div class="form-actions">
+              <div class="char-counter" id="char-counter" aria-live="polite">
+                0/500
+              </div>
+              <button
+                type="submit"
+                class="send-btn"
+                id="send-btn"
+                aria-label="Enviar pergunta"
+              >
+                Enviar 📤
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Info sobre Rate Limit -->
+        <div class="rate-limit-info" id="rate-limit-info">
+          <small>💡 Você pode fazer até 50 perguntas por hora</small>
+        </div>
+      </div>
+    </main>
+
+    <!-- Screen Reader Announcements -->
+    <div
+      id="sr-announcements"
+      class="sr-only"
+      role="status"
+      aria-live="assertive"
+      aria-atomic="true"
+    ></div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/tia-dora.js"></script>
+  </body>
+</html>

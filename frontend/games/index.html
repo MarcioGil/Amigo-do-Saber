@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Jogos educativos - Amigo do Saber" />
+    <title>Jogos Educativos | Amigo do Saber</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/variables.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/accessibility.css" />
+
+    <style>
+      .game-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--radius-lg);
+        transition: all var(--transition-base);
+        cursor: pointer;
+      }
+
+      .game-card:hover,
+      .game-card:focus-within {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .game-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 120px;
+        z-index: 0;
+      }
+
+      .game-card.matematica::before {
+        background: linear-gradient(
+          135deg,
+          var(--matematica-light),
+          var(--matematica-dark)
+        );
+      }
+
+      .game-card.portugues::before {
+        background: linear-gradient(
+          135deg,
+          var(--portugues-light),
+          var(--portugues-dark)
+        );
+      }
+
+      .game-card.ciencias::before {
+        background: linear-gradient(
+          135deg,
+          var(--ciencias-light),
+          var(--ciencias-dark)
+        );
+      }
+
+      .game-card.ingles::before {
+        background: linear-gradient(
+          135deg,
+          var(--ingles-light),
+          var(--ingles-dark)
+        );
+      }
+
+      .game-icon {
+        font-size: 4rem;
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding-top: var(--spacing-lg);
+        margin-bottom: var(--spacing-md);
+      }
+
+      .game-content {
+        position: relative;
+        z-index: 1;
+        background: white;
+        padding: var(--spacing-lg);
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        margin-top: -20px;
+      }
+
+      .difficulty-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-2xs);
+        padding: var(--spacing-2xs) var(--spacing-sm);
+        border-radius: var(--radius-sm);
+        font-size: var(--text-xs);
+        font-weight: 600;
+      }
+
+      .difficulty-easy {
+        background: var(--success-100);
+        color: var(--success-700);
+      }
+
+      .difficulty-medium {
+        background: var(--warning-100);
+        color: var(--warning-700);
+      }
+
+      .difficulty-hard {
+        background: var(--error-100);
+        color: var(--error-700);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <a href="../index.html" class="logo"> 📚 Amigo do Saber </a>
+
+          <nav class="nav" id="main-nav">
+            <a href="../dashboard.html" class="nav-link">Painel</a>
+            <a href="../student-area.html" class="nav-link">Área do Aluno</a>
+            <a href="../tia-dora.html" class="nav-link">Tia Dora</a>
+            <a href="index.html" class="nav-link active">Jogos</a>
+          </nav>
+
+          <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="section">
+      <div class="container">
+        <!-- Hero -->
+        <div style="text-align: center; margin-bottom: var(--spacing-2xl)">
+          <h1 style="margin-bottom: var(--spacing-sm)">🎮 Jogos Educativos</h1>
+          <p style="color: var(--text-secondary); font-size: var(--text-lg)">
+            Aprenda brincando! Escolha um jogo e divirta-se
+          </p>
+        </div>
+
+        <!-- Filtros -->
+        <div
+          style="
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-xl);
+            flex-wrap: wrap;
+            justify-content: center;
+          "
+        >
+          <button class="btn btn-primary" onclick="filterGames('all')">
+            Todos
+          </button>
+          <button class="btn btn-outline" onclick="filterGames('matematica')">
+            📐 Matemática
+          </button>
+          <button class="btn btn-outline" onclick="filterGames('portugues')">
+            📖 Português
+          </button>
+          <button class="btn btn-outline" onclick="filterGames('ciencias')">
+            🔬 Ciências
+          </button>
+          <button class="btn btn-outline" onclick="filterGames('ingles')">
+            🗣️ Inglês
+          </button>
+        </div>
+
+        <!-- Grid de Jogos -->
+        <div class="grid-3" id="games-grid">
+          <!-- Quiz Matemática -->
+          <a
+            href="quiz-matematica.html"
+            class="game-card card matematica"
+            data-subject="matematica"
+          >
+            <div class="game-icon">🧮</div>
+            <div class="game-content">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: start;
+                  margin-bottom: var(--spacing-sm);
+                "
+              >
+                <h3>Quiz de Matemática</h3>
+                <span class="difficulty-badge difficulty-medium"
+                  >⭐⭐ Médio</span
+                >
+              </div>
+              <p
+                style="
+                  color: var(--text-secondary);
+                  margin-bottom: var(--spacing-md);
+                  font-size: var(--text-sm);
+                "
+              >
+                Responda perguntas de matemática e ganhe pontos!
+              </p>
+              <div
+                style="
+                  display: flex;
+                  gap: var(--spacing-md);
+                  font-size: var(--text-sm);
+                  color: var(--text-tertiary);
+                "
+              >
+                <span>⏱️ 5 min</span>
+                <span>🏆 50 pts</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Caça-Palavras -->
+          <a
+            href="caca-palavras.html"
+            class="game-card card portugues"
+            data-subject="portugues"
+          >
+            <div class="game-icon">🔍</div>
+            <div class="game-content">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: start;
+                  margin-bottom: var(--spacing-sm);
+                "
+              >
+                <h3>Caça-Palavras</h3>
+                <span class="difficulty-badge difficulty-easy">⭐ Fácil</span>
+              </div>
+              <p
+                style="
+                  color: var(--text-secondary);
+                  margin-bottom: var(--spacing-md);
+                  font-size: var(--text-sm);
+                "
+              >
+                Encontre as palavras escondidas no tabuleiro
+              </p>
+              <div
+                style="
+                  display: flex;
+                  gap: var(--spacing-md);
+                  font-size: var(--text-sm);
+                  color: var(--text-tertiary);
+                "
+              >
+                <span>⏱️ 8 min</span>
+                <span>🏆 40 pts</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Jogo da Memória -->
+          <a
+            href="memoria.html"
+            class="game-card card ciencias"
+            data-subject="ciencias"
+          >
+            <div class="game-icon">🧠</div>
+            <div class="game-content">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: start;
+                  margin-bottom: var(--spacing-sm);
+                "
+              >
+                <h3>Jogo da Memória</h3>
+                <span class="difficulty-badge difficulty-easy">⭐ Fácil</span>
+              </div>
+              <p
+                style="
+                  color: var(--text-secondary);
+                  margin-bottom: var(--spacing-md);
+                  font-size: var(--text-sm);
+                "
+              >
+                Combine os pares de cartas com termos científicos
+              </p>
+              <div
+                style="
+                  display: flex;
+                  gap: var(--spacing-md);
+                  font-size: var(--text-sm);
+                  color: var(--text-tertiary);
+                "
+              >
+                <span>⏱️ 10 min</span>
+                <span>🏆 60 pts</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Vocabulário Inglês -->
+          <a
+            href="ingles-vocabulario.html"
+            class="game-card card ingles"
+            data-subject="ingles"
+          >
+            <div class="game-icon">🌍</div>
+            <div class="game-content">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: start;
+                  margin-bottom: var(--spacing-sm);
+                "
+              >
+                <h3>Vocabulário em Inglês</h3>
+                <span class="difficulty-badge difficulty-medium"
+                  >⭐⭐ Médio</span
+                >
+              </div>
+              <p
+                style="
+                  color: var(--text-secondary);
+                  margin-bottom: var(--spacing-md);
+                  font-size: var(--text-sm);
+                "
+              >
+                Associe palavras em inglês com suas traduções
+              </p>
+              <div
+                style="
+                  display: flex;
+                  gap: var(--spacing-md);
+                  font-size: var(--text-sm);
+                  color: var(--text-tertiary);
+                "
+              >
+                <span>⏱️ 7 min</span>
+                <span>🏆 55 pts</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Tabuada Rápida -->
+          <a
+            href="tabuada-rapida.html"
+            class="game-card card matematica"
+            data-subject="matematica"
+          >
+            <div class="game-icon">⚡</div>
+            <div class="game-content">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: start;
+                  margin-bottom: var(--spacing-sm);
+                "
+              >
+                <h3>Tabuada Rápida</h3>
+                <span class="difficulty-badge difficulty-hard"
+                  >⭐⭐⭐ Difícil</span
+                >
+              </div>
+              <p
+                style="
+                  color: var(--text-secondary);
+                  margin-bottom: var(--spacing-md);
+                  font-size: var(--text-sm);
+                "
+              >
+                Responda multiplicações o mais rápido possível!
+              </p>
+              <div
+                style="
+                  display: flex;
+                  gap: var(--spacing-md);
+                  font-size: var(--text-sm);
+                  color: var(--text-tertiary);
+                "
+              >
+                <span>⏱️ 3 min</span>
+                <span>🏆 75 pts</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Complete a Frase -->
+          <a
+            href="complete-frase.html"
+            class="game-card card portugues"
+            data-subject="portugues"
+          >
+            <div class="game-icon">✍️</div>
+            <div class="game-content">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: start;
+                  margin-bottom: var(--spacing-sm);
+                "
+              >
+                <h3>Complete a Frase</h3>
+                <span class="difficulty-badge difficulty-medium"
+                  >⭐⭐ Médio</span
+                >
+              </div>
+              <p
+                style="
+                  color: var(--text-secondary);
+                  margin-bottom: var(--spacing-md);
+                  font-size: var(--text-sm);
+                "
+              >
+                Escolha a palavra correta para completar a frase
+              </p>
+              <div
+                style="
+                  display: flex;
+                  gap: var(--spacing-md);
+                  font-size: var(--text-sm);
+                  color: var(--text-tertiary);
+                "
+              >
+                <span>⏱️ 6 min</span>
+                <span>🏆 45 pts</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Estatísticas -->
+        <section style="margin-top: var(--spacing-2xl)">
+          <div
+            class="card"
+            style="
+              background: linear-gradient(
+                135deg,
+                var(--primary-50),
+                var(--primary-100)
+              );
+            "
+          >
+            <div style="text-align: center">
+              <h2 style="margin-bottom: var(--spacing-md)">
+                🏆 Suas Estatísticas
+              </h2>
+              <div class="grid-3">
+                <div>
+                  <p
+                    style="
+                      font-size: var(--text-3xl);
+                      font-weight: 700;
+                      color: var(--primary-600);
+                    "
+                    id="total-jogos"
+                  >
+                    0
+                  </p>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: var(--text-sm);
+                    "
+                  >
+                    Jogos Completados
+                  </p>
+                </div>
+                <div>
+                  <p
+                    style="
+                      font-size: var(--text-3xl);
+                      font-weight: 700;
+                      color: var(--success-600);
+                    "
+                    id="pontos-jogos"
+                  >
+                    0
+                  </p>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: var(--text-sm);
+                    "
+                  >
+                    Pontos em Jogos
+                  </p>
+                </div>
+                <div>
+                  <p
+                    style="
+                      font-size: var(--text-3xl);
+                      font-weight: 700;
+                      color: var(--warning-600);
+                    "
+                    id="melhor-tempo"
+                  >
+                    --
+                  </p>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: var(--text-sm);
+                    "
+                  >
+                    Melhor Tempo
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../js/config.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/accessibility.js"></script>
+    <script>
+      // Verificar autenticação
+      const user = storage.get("user")
+      if (!user) {
+        window.location.href = "../login.html"
+      }
+
+      // Filtrar jogos por matéria
+      function filterGames(subject) {
+        const games = document.querySelectorAll(".game-card")
+        const buttons = document.querySelectorAll('[onclick^="filterGames"]')
+
+        // Atualizar botões
+        buttons.forEach((btn) => {
+          btn.classList.remove("btn-primary")
+          btn.classList.add("btn-outline")
+        })
+        event.target.classList.remove("btn-outline")
+        event.target.classList.add("btn-primary")
+
+        // Filtrar jogos
+        games.forEach((game) => {
+          if (subject === "all" || game.dataset.subject === subject) {
+            game.style.display = "block"
+          } else {
+            game.style.display = "none"
+          }
+        })
+      }
+
+      // Carregar estatísticas
+      function loadGameStats() {
+        // Mock data - substituir por chamadas reais à API
+        const mockStats = {
+          totalJogos: 15,
+          pontosJogos: 675,
+          melhorTempo: "2:34",
+        }
+
+        document.getElementById("total-jogos").textContent =
+          mockStats.totalJogos
+        document.getElementById("pontos-jogos").textContent =
+          mockStats.pontosJogos
+        document.getElementById("melhor-tempo").textContent =
+          mockStats.melhorTempo
+      }
+
+      // Carregar ao iniciar
+      loadGameStats()
+    </script>
+  </body>
+</html>

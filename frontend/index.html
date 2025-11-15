@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Amigo do Saber - Plataforma educacional gratuita de reforço escolar com IA, gamificação e jogos educativos"
+    />
+    <meta
+      name="keywords"
+      content="reforço escolar, educação, gamificação, IA, professora virtual"
+    />
+    <meta name="theme-color" content="#667eea" />
+
+    <!-- Content Security Policy -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; 
+               script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; 
+               style-src 'self' 'unsafe-inline'; 
+               img-src 'self' data: https:; 
+               connect-src 'self' https://*.azurewebsites.net https://*.azure.com;
+               font-src 'self' data:;"
+    />
+
+    <title>Amigo do Saber - Reforço Escolar Gratuito</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/variables.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <link rel="stylesheet" href="/css/accessibility.css" />
+  </head>
+  <body>
+    <!-- Skip Link para Acessibilidade -->
+    <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+
+    <!-- Header -->
+    <header role="banner">
+      <nav role="navigation" aria-label="Menu principal" class="navbar">
+        <div class="nav-container">
+          <a href="/" class="logo" aria-label="Amigo do Saber - Página inicial">
+            <span class="logo-icon">📚</span>
+            <span class="logo-text">Amigo do Saber</span>
+          </a>
+
+          <button
+            class="menu-toggle"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+          >
+            <span class="hamburger"></span>
+          </button>
+
+          <div class="nav-menu" id="navMenu">
+            <ul class="nav-links">
+              <li><a href="/" class="nav-link active">Início</a></li>
+              <li><a href="/sobre.html" class="nav-link">Sobre</a></li>
+              <li>
+                <a href="/como-funciona.html" class="nav-link">Como Funciona</a>
+              </li>
+              <li><a href="/contato.html" class="nav-link">Contato</a></li>
+            </ul>
+
+            <div class="nav-actions">
+              <button class="btn btn-outline" onclick="openLogin()">
+                Entrar
+              </button>
+              <button class="btn btn-primary" onclick="openCadastro()">
+                Começar Grátis
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+      <!-- Hero Section -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container hero-content">
+          <div class="hero-text">
+            <h1 id="hero-title" class="hero-title">
+              Reforço Escolar <span class="text-gradient">Gratuito</span>
+              com Inteligência Artificial
+            </h1>
+            <p class="hero-subtitle">
+              Uma professora virtual que explica, tira dúvidas e acompanha o
+              aprendizado do seu filho. Com jogos, gamificação e muito mais!
+            </p>
+            <div class="hero-cta">
+              <button
+                class="btn btn-large btn-primary"
+                onclick="openCadastro()"
+              >
+                Começar Agora - É Grátis!
+              </button>
+              <button
+                class="btn btn-large btn-outline"
+                onclick="scrollToDemo()"
+              >
+                Ver Como Funciona
+              </button>
+            </div>
+            <p class="hero-note">
+              ✅ 100% Gratuito &nbsp;|&nbsp; ✅ Sem propagandas &nbsp;|&nbsp; ✅
+              Seguro para crianças
+            </p>
+          </div>
+
+          <div class="hero-image">
+            <img
+              src="/assets/hero-illustration.svg"
+              alt="Crianças estudando com tecnologia"
+              width="600"
+              height="500"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Funcionalidades -->
+      <section class="features" aria-labelledby="features-title">
+        <div class="container">
+          <h2 id="features-title" class="section-title">O que oferecemos?</h2>
+          <p class="section-subtitle">
+            Tudo que seu filho precisa para aprender e se desenvolver
+          </p>
+
+          <div class="features-grid">
+            <!-- Professora Virtual -->
+            <article class="feature-card">
+              <div class="feature-icon">👩‍🏫</div>
+              <h3>Professora Virtual</h3>
+              <p>
+                A Profa. Luna explica conceitos, tira dúvidas e adapta a
+                linguagem para cada idade. Disponível 24/7!
+              </p>
+            </article>
+
+            <!-- Reforço Personalizado -->
+            <article class="feature-card">
+              <div class="feature-icon">📖</div>
+              <h3>Reforço Personalizado</h3>
+              <p>
+                Exercícios adaptados à série, matérias e dificuldades
+                específicas de cada aluno.
+              </p>
+            </article>
+
+            <!-- Gamificação -->
+            <article class="feature-card">
+              <div class="feature-icon">🎮</div>
+              <h3>Sistema de Gamificação</h3>
+              <p>
+                Pontos, badges, níveis e missões diárias para tornar o estudo
+                divertido e engajante!
+              </p>
+            </article>
+
+            <!-- Jogos Educativos -->
+            <article class="feature-card">
+              <div class="feature-icon">🕹️</div>
+              <h3>Jogos Educativos</h3>
+              <p>
+                Aprenda brincando com quiz, caça-palavras, jogo da memória e
+                muito mais!
+              </p>
+            </article>
+
+            <!-- Inglês -->
+            <article class="feature-card">
+              <div class="feature-icon">🌎</div>
+              <h3>Aulas de Inglês</h3>
+              <p>
+                Vocabulário, pronúncia e conversação básica de forma interativa
+                e divertida.
+              </p>
+            </article>
+
+            <!-- Bot Conselheiro -->
+            <article class="feature-card">
+              <div class="feature-icon">🤖</div>
+              <h3>Bot Conselheiro</h3>
+              <p>
+                Orientações sobre estudos, organização, comportamento e
+                segurança online.
+              </p>
+            </article>
+
+            <!-- Preparação para Provas -->
+            <article class="feature-card">
+              <div class="feature-icon">📝</div>
+              <h3>Preparação para Provas</h3>
+              <p>
+                Simulados e revisões focadas nos conteúdos que mais caem nas
+                avaliações.
+              </p>
+            </article>
+
+            <!-- Dashboard para Pais -->
+            <article class="feature-card">
+              <div class="feature-icon">📊</div>
+              <h3>Acompanhamento</h3>
+              <p>
+                Responsáveis veem o progresso em tempo real e recebem relatórios
+                personalizados.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Como Funciona -->
+      <section class="how-it-works" id="demo" aria-labelledby="how-title">
+        <div class="container">
+          <h2 id="how-title" class="section-title">Como funciona?</h2>
+          <p class="section-subtitle">Começar é simples e rápido!</p>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h3>Cadastro Rápido</h3>
+                <p>
+                  O responsável cria uma conta gratuita e cadastra o perfil do
+                  aluno (nome, série, matérias).
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h3>Personalização</h3>
+                <p>
+                  A plataforma conhece o aluno pelo nome e adapta o conteúdo às
+                  necessidades dele.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h3>Aprendizado</h3>
+                <p>
+                  O aluno estuda, joga, interage com a professora virtual e
+                  evolui no seu ritmo!
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h3>Acompanhamento</h3>
+                <p>
+                  Responsáveis acompanham o progresso e celebram as conquistas
+                  junto com a criança!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Depoimentos (mock) -->
+      <section class="testimonials" aria-labelledby="testimonials-title">
+        <div class="container">
+          <h2 id="testimonials-title" class="section-title">
+            O que dizem sobre nós
+          </h2>
+
+          <div class="testimonials-grid">
+            <blockquote class="testimonial">
+              <p class="testimonial-text">
+                "Meu filho melhorou muito em matemática! A professora virtual
+                explica de um jeito que ele entende."
+              </p>
+              <cite class="testimonial-author">
+                <strong>Maria S.</strong>, mãe do João (5º ano)
+              </cite>
+            </blockquote>
+
+            <blockquote class="testimonial">
+              <p class="testimonial-text">
+                "Finalmente um app educativo que prende a atenção! Minha filha
+                adora os jogos e está aprendendo muito."
+              </p>
+              <cite class="testimonial-author">
+                <strong>Carlos R.</strong>, pai da Ana (3º ano)
+              </cite>
+            </blockquote>
+
+            <blockquote class="testimonial">
+              <p class="testimonial-text">
+                "Gratuito e de qualidade! Estava pagando caro por reforço, agora
+                tenho uma solução melhor."
+              </p>
+              <cite class="testimonial-author">
+                <strong>Fernanda L.</strong>, mãe do Pedro (7º ano)
+              </cite>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Final -->
+      <section class="cta-section" aria-labelledby="cta-title">
+        <div class="container cta-content">
+          <h2 id="cta-title" class="cta-title">
+            Pronto para transformar o aprendizado do seu filho?
+          </h2>
+          <p class="cta-subtitle">
+            Cadastre-se agora e comece a usar gratuitamente!
+          </p>
+          <button class="btn btn-large btn-white" onclick="openCadastro()">
+            Começar Agora
+          </button>
+          <p class="cta-note">
+            Sem cartão de crédito. Sem taxa escondida. 100% gratuito.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+      <div class="container footer-content">
+        <div class="footer-section">
+          <h3>Amigo do Saber</h3>
+          <p>Democratizando a educação de qualidade na Baixada.</p>
+        </div>
+
+        <div class="footer-section">
+          <h4>Links Rápidos</h4>
+          <ul>
+            <li><a href="/sobre.html">Sobre</a></li>
+            <li><a href="/como-funciona.html">Como Funciona</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+            <li><a href="/contato.html">Contato</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="/privacidade.html">Política de Privacidade</a></li>
+            <li><a href="/termos.html">Termos de Uso</a></li>
+            <li><a href="/lgpd.html">LGPD</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Acessibilidade</h4>
+          <button
+            class="btn-accessibility"
+            onclick="toggleHighContrast()"
+            aria-label="Ativar alto contraste"
+          >
+            Alto Contraste
+          </button>
+          <button
+            class="btn-accessibility"
+            onclick="increaseFontSize()"
+            aria-label="Aumentar fonte"
+          >
+            Aumentar Fonte
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Amigo do Saber. Todos os direitos reservados.</p>
+        <p>Feito com ❤️ para a educação na Baixada</p>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/config.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/accessibility.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

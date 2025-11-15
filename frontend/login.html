@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Entre ou cadastre-se no Amigo do Saber" />
+    <title>Login | Amigo do Saber</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/accessibility.css" />
+  </head>
+  <body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+
+    <!-- Header Simples -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <a href="index.html" class="logo"> 📚 Amigo do Saber </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="section">
+      <div class="container" style="max-width: 500px">
+        <!-- Tabs: Login / Cadastro -->
+        <div class="card">
+          <ul
+            class="tab-list"
+            role="tablist"
+            aria-label="Escolha entre entrar ou cadastrar"
+          >
+            <li role="presentation">
+              <button
+                role="tab"
+                aria-selected="true"
+                aria-controls="login-panel"
+                id="login-tab"
+                class="tab-button active"
+              >
+                Entrar
+              </button>
+            </li>
+            <li role="presentation">
+              <button
+                role="tab"
+                aria-selected="false"
+                aria-controls="cadastro-panel"
+                id="cadastro-tab"
+                class="tab-button"
+                tabindex="-1"
+              >
+                Cadastrar
+              </button>
+            </li>
+          </ul>
+
+          <!-- Panel: Login -->
+          <div
+            id="login-panel"
+            role="tabpanel"
+            aria-labelledby="login-tab"
+            class="tab-panel active"
+            style="margin-top: var(--spacing-lg)"
+          >
+            <h2 style="margin-bottom: var(--spacing-md)">
+              Bem-vindo de volta!
+            </h2>
+            <p
+              style="
+                color: var(--text-secondary);
+                margin-bottom: var(--spacing-lg);
+              "
+            >
+              Entre com seu email e senha para acessar a plataforma
+            </p>
+
+            <form id="login-form">
+              <div class="form-group">
+                <label for="login-email" class="form-label">Email:</label>
+                <input
+                  type="email"
+                  id="login-email"
+                  name="email"
+                  class="form-input"
+                  placeholder="seu@email.com"
+                  required
+                  autocomplete="email"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="login-password" class="form-label">Senha:</label>
+                <input
+                  type="password"
+                  id="login-password"
+                  name="password"
+                  class="form-input"
+                  placeholder="Sua senha"
+                  required
+                  autocomplete="current-password"
+                />
+              </div>
+
+              <div
+                class="form-group"
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                "
+              >
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: var(--spacing-xs);
+                    font-weight: normal;
+                  "
+                >
+                  <input type="checkbox" name="remember" />
+                  Lembrar-me
+                </label>
+                <a
+                  href="#"
+                  style="font-size: var(--text-sm); color: var(--primary-600)"
+                  >Esqueceu a senha?</a
+                >
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary"
+                style="width: 100%; margin-top: var(--spacing-md)"
+              >
+                Entrar 🚀
+              </button>
+            </form>
+          </div>
+
+          <!-- Panel: Cadastro -->
+          <div
+            id="cadastro-panel"
+            role="tabpanel"
+            aria-labelledby="cadastro-tab"
+            class="tab-panel"
+            style="margin-top: var(--spacing-lg)"
+            hidden
+          >
+            <h2 style="margin-bottom: var(--spacing-md)">Criar conta grátis</h2>
+            <p
+              style="
+                color: var(--text-secondary);
+                margin-bottom: var(--spacing-lg);
+              "
+            >
+              Preencha os dados para começar sua jornada de aprendizado!
+            </p>
+
+            <form id="cadastro-form">
+              <!-- Dados do Responsável -->
+              <fieldset
+                style="
+                  border: none;
+                  padding: 0;
+                  margin-bottom: var(--spacing-lg);
+                "
+              >
+                <legend
+                  style="
+                    font-weight: 700;
+                    margin-bottom: var(--spacing-md);
+                    font-size: var(--text-lg);
+                  "
+                >
+                  Dados do Responsável
+                </legend>
+
+                <div class="form-group">
+                  <label for="responsavel-nome" class="form-label"
+                    >Nome completo:</label
+                  >
+                  <input
+                    type="text"
+                    id="responsavel-nome"
+                    name="responsavel.nome"
+                    class="form-input"
+                    placeholder="Maria Silva"
+                    required
+                    autocomplete="name"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="responsavel-email" class="form-label"
+                    >Email:</label
+                  >
+                  <input
+                    type="email"
+                    id="responsavel-email"
+                    name="responsavel.email"
+                    class="form-input"
+                    placeholder="maria@email.com"
+                    required
+                    autocomplete="email"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="responsavel-telefone" class="form-label"
+                    >Telefone:</label
+                  >
+                  <input
+                    type="tel"
+                    id="responsavel-telefone"
+                    name="responsavel.telefone"
+                    class="form-input"
+                    placeholder="(11) 99999-9999"
+                    required
+                    autocomplete="tel"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="responsavel-parentesco" class="form-label"
+                    >Parentesco:</label
+                  >
+                  <select
+                    id="responsavel-parentesco"
+                    name="responsavel.parentesco"
+                    class="form-select"
+                    required
+                  >
+                    <option value="">Selecione...</option>
+                    <option value="Mãe">Mãe</option>
+                    <option value="Pai">Pai</option>
+                    <option value="Avó">Avó</option>
+                    <option value="Avô">Avô</option>
+                    <option value="Tia">Tia</option>
+                    <option value="Tio">Tio</option>
+                    <option value="Outro">Outro</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="senha" class="form-label">Senha:</label>
+                  <input
+                    type="password"
+                    id="senha"
+                    name="senha"
+                    class="form-input"
+                    placeholder="Mínimo 8 caracteres"
+                    required
+                    minlength="8"
+                    autocomplete="new-password"
+                  />
+                  <small class="form-help">Mínimo 8 caracteres</small>
+                </div>
+              </fieldset>
+
+              <!-- Dados do Aluno -->
+              <fieldset
+                style="
+                  border: none;
+                  padding: 0;
+                  margin-bottom: var(--spacing-lg);
+                "
+              >
+                <legend
+                  style="
+                    font-weight: 700;
+                    margin-bottom: var(--spacing-md);
+                    font-size: var(--text-lg);
+                  "
+                >
+                  Dados do Aluno
+                </legend>
+
+                <div class="form-group">
+                  <label for="aluno-nome" class="form-label"
+                    >Nome do aluno:</label
+                  >
+                  <input
+                    type="text"
+                    id="aluno-nome"
+                    name="aluno.nome"
+                    class="form-input"
+                    placeholder="João Silva"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="aluno-nascimento" class="form-label"
+                    >Data de nascimento:</label
+                  >
+                  <input
+                    type="date"
+                    id="aluno-nascimento"
+                    name="aluno.dataNascimento"
+                    class="form-input"
+                    required
+                    max="<?php echo date('Y-m-d'); ?>"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="aluno-serie" class="form-label">Série:</label>
+                  <select
+                    id="aluno-serie"
+                    name="aluno.serie"
+                    class="form-select"
+                    required
+                  >
+                    <option value="">Selecione...</option>
+                    <option value="1º Ano">1º Ano</option>
+                    <option value="2º Ano">2º Ano</option>
+                    <option value="3º Ano">3º Ano</option>
+                    <option value="4º Ano">4º Ano</option>
+                    <option value="5º Ano">5º Ano</option>
+                    <option value="6º Ano">6º Ano</option>
+                    <option value="7º Ano">7º Ano</option>
+                    <option value="8º Ano">8º Ano</option>
+                    <option value="9º Ano">9º Ano</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="aluno-escola" class="form-label"
+                    >Escola (opcional):</label
+                  >
+                  <input
+                    type="text"
+                    id="aluno-escola"
+                    name="aluno.escola"
+                    class="form-input"
+                    placeholder="Nome da escola"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Matérias de interesse:</label>
+                  <div style="display: grid; gap: var(--spacing-xs)">
+                    <label
+                      style="
+                        display: flex;
+                        align-items: center;
+                        gap: var(--spacing-xs);
+                        font-weight: normal;
+                      "
+                    >
+                      <input
+                        type="checkbox"
+                        name="aluno.materias"
+                        value="Matemática"
+                      />
+                      Matemática
+                    </label>
+                    <label
+                      style="
+                        display: flex;
+                        align-items: center;
+                        gap: var(--spacing-xs);
+                        font-weight: normal;
+                      "
+                    >
+                      <input
+                        type="checkbox"
+                        name="aluno.materias"
+                        value="Português"
+                      />
+                      Português
+                    </label>
+                    <label
+                      style="
+                        display: flex;
+                        align-items: center;
+                        gap: var(--spacing-xs);
+                        font-weight: normal;
+                      "
+                    >
+                      <input
+                        type="checkbox"
+                        name="aluno.materias"
+                        value="Ciências"
+                      />
+                      Ciências
+                    </label>
+                    <label
+                      style="
+                        display: flex;
+                        align-items: center;
+                        gap: var(--spacing-xs);
+                        font-weight: normal;
+                      "
+                    >
+                      <input
+                        type="checkbox"
+                        name="aluno.materias"
+                        value="História"
+                      />
+                      História
+                    </label>
+                    <label
+                      style="
+                        display: flex;
+                        align-items: center;
+                        gap: var(--spacing-xs);
+                        font-weight: normal;
+                      "
+                    >
+                      <input
+                        type="checkbox"
+                        name="aluno.materias"
+                        value="Geografia"
+                      />
+                      Geografia
+                    </label>
+                    <label
+                      style="
+                        display: flex;
+                        align-items: center;
+                        gap: var(--spacing-xs);
+                        font-weight: normal;
+                      "
+                    >
+                      <input
+                        type="checkbox"
+                        name="aluno.materias"
+                        value="Inglês"
+                      />
+                      Inglês
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+
+              <!-- Termos -->
+              <div class="form-group">
+                <label
+                  style="
+                    display: flex;
+                    gap: var(--spacing-xs);
+                    font-weight: normal;
+                  "
+                >
+                  <input type="checkbox" name="termos" required />
+                  <span style="font-size: var(--text-sm)">
+                    Concordo com os
+                    <a href="#" style="color: var(--primary-600)"
+                      >Termos de Uso</a
+                    >
+                    e
+                    <a href="#" style="color: var(--primary-600)"
+                      >Política de Privacidade</a
+                    >
+                  </span>
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary"
+                style="width: 100%; margin-top: var(--spacing-md)"
+              >
+                Criar conta grátis 🎉
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div
+          style="
+            text-align: center;
+            margin: var(--spacing-xl) 0;
+            color: var(--text-tertiary);
+          "
+        >
+          <small>Seus dados estão protegidos e seguros 🔒</small>
+        </div>
+      </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script>
+      // Lógica de Login
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault()
+
+          const email = document.getElementById("login-email").value
+          const password = document.getElementById("login-password").value
+
+          showLoader(true)
+
+          try {
+            // TODO: Implementar autenticação real com Azure AD B2C
+            // Por enquanto, simular login
+            await new Promise((resolve) => setTimeout(resolve, 1000))
+
+            // Mock user data
+            const userData = {
+              id: "mock-uuid",
+              nome: "João",
+              email: email,
+            }
+
+            storage.set("user", JSON.stringify(userData))
+            storage.set("authToken", "mock-token-" + Date.now())
+
+            showToast("Login realizado com sucesso!", "success")
+
+            setTimeout(() => {
+              window.location.href = "dashboard.html"
+            }, 500)
+          } catch (error) {
+            showToast("Erro ao fazer login. Tente novamente.", "error")
+          } finally {
+            showLoader(false)
+          }
+        })
+
+      // Lógica de Cadastro
+      document
+        .getElementById("cadastro-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault()
+
+          const formData = new FormData(e.target)
+          const data = {
+            responsavel: {
+              nome: formData.get("responsavel.nome"),
+              email: formData.get("responsavel.email"),
+              telefone: formData.get("responsavel.telefone"),
+              parentesco: formData.get("responsavel.parentesco"),
+            },
+            aluno: {
+              nome: formData.get("aluno.nome"),
+              dataNascimento: formData.get("aluno.dataNascimento"),
+              serie: formData.get("aluno.serie"),
+              escola: formData.get("aluno.escola") || "",
+              materias: [...formData.getAll("aluno.materias")],
+            },
+            senha: formData.get("senha"),
+          }
+
+          // Validar matérias
+          if (data.aluno.materias.length === 0) {
+            showToast(
+              "Selecione pelo menos uma matéria de interesse",
+              "warning"
+            )
+            return
+          }
+
+          showLoader(true)
+
+          try {
+            const response = await apiRequest("/cadastro", {
+              method: "POST",
+              body: JSON.stringify(data),
+            })
+
+            if (response.success) {
+              // Salvar token e user
+              storage.set("authToken", response.data.token)
+              storage.set("user", JSON.stringify(response.data.aluno))
+
+              showToast("Cadastro realizado com sucesso! 🎉", "success")
+
+              setTimeout(() => {
+                window.location.href = "dashboard.html"
+              }, 1000)
+            } else {
+              showToast(response.error || "Erro ao criar conta", "error")
+            }
+          } catch (error) {
+            console.error("Erro no cadastro:", error)
+            showToast("Erro ao criar conta. Tente novamente.", "error")
+          } finally {
+            showLoader(false)
+          }
+        })
+    </script>
+  </body>
+</html>

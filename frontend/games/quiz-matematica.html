@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz de Matemática | Amigo do Saber</title>
+
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/variables.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/accessibility.css" />
+
+    <style>
+      .quiz-container {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .question-card {
+        background: white;
+        padding: var(--spacing-2xl);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+      }
+
+      .answer-option {
+        display: block;
+        width: 100%;
+        padding: var(--spacing-lg);
+        margin-bottom: var(--spacing-md);
+        border: 2px solid var(--gray-300);
+        border-radius: var(--radius-md);
+        background: white;
+        cursor: pointer;
+        transition: all var(--transition-base);
+        text-align: left;
+        font-size: var(--text-lg);
+      }
+
+      .answer-option:hover:not(:disabled) {
+        border-color: var(--primary-400);
+        background: var(--primary-50);
+        transform: translateX(4px);
+      }
+
+      .answer-option.correct {
+        border-color: var(--success-500);
+        background: var(--success-50);
+        animation: correctPulse 0.5s ease;
+      }
+
+      .answer-option.incorrect {
+        border-color: var(--error-500);
+        background: var(--error-50);
+        animation: incorrectShake 0.5s ease;
+      }
+
+      .answer-option:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+
+      @keyframes correctPulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.02);
+        }
+      }
+
+      @keyframes incorrectShake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-10px);
+        }
+        75% {
+          transform: translateX(10px);
+        }
+      }
+
+      .timer {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        font-size: var(--text-xl);
+        font-weight: 700;
+        color: var(--primary-600);
+      }
+
+      .timer.warning {
+        color: var(--error-600);
+        animation: timerBlink 1s infinite;
+      }
+
+      @keyframes timerBlink {
+        0%,
+        50% {
+          opacity: 1;
+        }
+        51%,
+        100% {
+          opacity: 0.5;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <a href="../index.html" class="logo">📚 Amigo do Saber</a>
+          <a href="index.html" class="btn btn-outline">← Voltar aos Jogos</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="section">
+      <div class="container quiz-container">
+        <!-- Tela Inicial -->
+        <div id="start-screen" class="question-card" style="text-align: center">
+          <div style="font-size: 5rem; margin-bottom: var(--spacing-lg)">
+            🧮
+          </div>
+          <h1 style="margin-bottom: var(--spacing-md)">Quiz de Matemática</h1>
+          <p
+            style="
+              color: var(--text-secondary);
+              margin-bottom: var(--spacing-xl);
+              font-size: var(--text-lg);
+            "
+          >
+            Responda 10 perguntas de matemática e ganhe até 50 pontos!
+          </p>
+
+          <div
+            style="
+              background: var(--primary-50);
+              padding: var(--spacing-lg);
+              border-radius: var(--radius-md);
+              margin-bottom: var(--spacing-xl);
+            "
+          >
+            <h3 style="margin-bottom: var(--spacing-sm)">📋 Instruções</h3>
+            <ul
+              style="
+                text-align: left;
+                color: var(--text-secondary);
+                line-height: 1.8;
+              "
+            >
+              <li>✓ 10 perguntas de múltipla escolha</li>
+              <li>✓ 5 minutos no total</li>
+              <li>✓ 5 pontos por resposta correta</li>
+              <li>✓ Responda o mais rápido possível!</li>
+            </ul>
+          </div>
+
+          <button
+            class="btn btn-primary"
+            style="
+              font-size: var(--text-lg);
+              padding: var(--spacing-md) var(--spacing-2xl);
+            "
+            onclick="startQuiz()"
+          >
+            Começar Quiz 🚀
+          </button>
+        </div>
+
+        <!-- Tela do Quiz -->
+        <div id="quiz-screen" style="display: none">
+          <!-- Header do Quiz -->
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: var(--spacing-xl);
+            "
+          >
+            <div>
+              <span style="color: var(--text-secondary)">Questão</span>
+              <span
+                style="
+                  font-size: var(--text-2xl);
+                  font-weight: 700;
+                  color: var(--primary-600);
+                "
+                id="question-number"
+                >1</span
+              >
+              <span style="color: var(--text-secondary)">/10</span>
+            </div>
+
+            <div class="timer" id="timer">
+              ⏱️ <span id="time-remaining">5:00</span>
+            </div>
+
+            <div>
+              <span style="color: var(--text-secondary)">Pontos:</span>
+              <span
+                style="
+                  font-size: var(--text-2xl);
+                  font-weight: 700;
+                  color: var(--success-600);
+                "
+                id="current-score"
+                >0</span
+              >
+            </div>
+          </div>
+
+          <!-- Barra de Progresso -->
+          <div class="progress" style="margin-bottom: var(--spacing-xl)">
+            <div
+              class="progress-bar"
+              id="quiz-progress"
+              style="width: 10%"
+              role="progressbar"
+            ></div>
+          </div>
+
+          <!-- Questão -->
+          <div class="question-card">
+            <h2
+              id="question-text"
+              style="
+                font-size: var(--text-2xl);
+                margin-bottom: var(--spacing-xl);
+                text-align: center;
+              "
+            >
+              Carregando pergunta...
+            </h2>
+
+            <div id="answers-container">
+              <!-- Opções serão inseridas aqui -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Tela de Resultado -->
+        <div
+          id="result-screen"
+          class="question-card"
+          style="display: none; text-align: center"
+        >
+          <div
+            id="result-icon"
+            style="font-size: 6rem; margin-bottom: var(--spacing-lg)"
+          >
+            🏆
+          </div>
+          <h1 id="result-title" style="margin-bottom: var(--spacing-md)">
+            Parabéns!
+          </h1>
+          <p
+            id="result-message"
+            style="
+              color: var(--text-secondary);
+              margin-bottom: var(--spacing-xl);
+              font-size: var(--text-lg);
+            "
+          ></p>
+
+          <div class="grid-3" style="margin-bottom: var(--spacing-xl)">
+            <div
+              style="
+                background: var(--success-50);
+                padding: var(--spacing-lg);
+                border-radius: var(--radius-md);
+              "
+            >
+              <p
+                style="
+                  font-size: var(--text-3xl);
+                  font-weight: 700;
+                  color: var(--success-600);
+                "
+                id="final-score"
+              >
+                0
+              </p>
+              <p
+                style="color: var(--text-secondary); font-size: var(--text-sm)"
+              >
+                Pontos
+              </p>
+            </div>
+            <div
+              style="
+                background: var(--primary-50);
+                padding: var(--spacing-lg);
+                border-radius: var(--radius-md);
+              "
+            >
+              <p
+                style="
+                  font-size: var(--text-3xl);
+                  font-weight: 700;
+                  color: var(--primary-600);
+                "
+                id="final-correct"
+              >
+                0
+              </p>
+              <p
+                style="color: var(--text-secondary); font-size: var(--text-sm)"
+              >
+                Acertos
+              </p>
+            </div>
+            <div
+              style="
+                background: var(--warning-50);
+                padding: var(--spacing-lg);
+                border-radius: var(--radius-md);
+              "
+            >
+              <p
+                style="
+                  font-size: var(--text-3xl);
+                  font-weight: 700;
+                  color: var(--warning-600);
+                "
+                id="final-time"
+              >
+                0:00
+              </p>
+              <p
+                style="color: var(--text-secondary); font-size: var(--text-sm)"
+              >
+                Tempo
+              </p>
+            </div>
+          </div>
+
+          <div
+            style="
+              display: flex;
+              gap: var(--spacing-md);
+              justify-content: center;
+            "
+          >
+            <button class="btn btn-primary" onclick="startQuiz()">
+              Jogar Novamente
+            </button>
+            <a href="index.html" class="btn btn-outline">Outros Jogos</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+      // Estado do quiz
+      let currentQuestion = 0
+      let score = 0
+      let correctAnswers = 0
+      let timeRemaining = 300 // 5 minutos em segundos
+      let timerInterval = null
+      let startTime = null
+
+      // Banco de perguntas
+      const questions = [
+        { q: "Quanto é 7 × 8?", answers: ["54", "56", "58", "64"], correct: 1 },
+        {
+          q: "Qual o resultado de 45 ÷ 5?",
+          answers: ["7", "8", "9", "10"],
+          correct: 2,
+        },
+        {
+          q: "Quanto é 23 + 17?",
+          answers: ["30", "35", "40", "45"],
+          correct: 2,
+        },
+        {
+          q: "Qual é metade de 64?",
+          answers: ["28", "30", "32", "34"],
+          correct: 2,
+        },
+        {
+          q: "Quanto é 12 × 12?",
+          answers: ["124", "134", "144", "154"],
+          correct: 2,
+        },
+        {
+          q: "Qual o resultado de 100 - 37?",
+          answers: ["53", "63", "73", "83"],
+          correct: 1,
+        },
+        {
+          q: "Quanto é 15 + 28 + 7?",
+          answers: ["40", "45", "50", "55"],
+          correct: 2,
+        },
+        {
+          q: "Qual é 1/4 de 80?",
+          answers: ["15", "20", "25", "30"],
+          correct: 1,
+        },
+        { q: "Quanto é 9 × 7?", answers: ["56", "63", "72", "81"], correct: 1 },
+        {
+          q: "Qual o resultado de 144 ÷ 12?",
+          answers: ["10", "11", "12", "13"],
+          correct: 2,
+        },
+      ]
+
+      // Embaralhar perguntas
+      function shuffleArray(array) {
+        const newArray = [...array]
+        for (let i = newArray.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1))
+          ;[newArray[i], newArray[j]] = [newArray[j], newArray[i]]
+        }
+        return newArray
+      }
+
+      let shuffledQuestions = shuffleArray(questions)
+
+      // Iniciar quiz
+      function startQuiz() {
+        currentQuestion = 0
+        score = 0
+        correctAnswers = 0
+        timeRemaining = 300
+        startTime = Date.now()
+        shuffledQuestions = shuffleArray(questions)
+
+        document.getElementById("start-screen").style.display = "none"
+        document.getElementById("result-screen").style.display = "none"
+        document.getElementById("quiz-screen").style.display = "block"
+
+        showQuestion()
+        startTimer()
+      }
+
+      // Mostrar questão
+      function showQuestion() {
+        const question = shuffledQuestions[currentQuestion]
+
+        document.getElementById("question-number").textContent =
+          currentQuestion + 1
+        document.getElementById("question-text").textContent = question.q
+        document.getElementById("current-score").textContent = score
+
+        const progress = ((currentQuestion + 1) / questions.length) * 100
+        document.getElementById("quiz-progress").style.width = `${progress}%`
+
+        const answersContainer = document.getElementById("answers-container")
+        answersContainer.innerHTML = question.answers
+          .map(
+            (answer, index) => `
+        <button class="answer-option" onclick="selectAnswer(${index})" data-index="${index}">
+          ${String.fromCharCode(65 + index)}) ${answer}
+        </button>
+      `
+          )
+          .join("")
+      }
+
+      // Selecionar resposta
+      function selectAnswer(index) {
+        const question = shuffledQuestions[currentQuestion]
+        const buttons = document.querySelectorAll(".answer-option")
+        const selectedButton = buttons[index]
+
+        // Desabilitar todos os botões
+        buttons.forEach((btn) => (btn.disabled = true))
+
+        if (index === question.correct) {
+          selectedButton.classList.add("correct")
+          score += 5
+          correctAnswers++
+          document.getElementById("current-score").textContent = score
+        } else {
+          selectedButton.classList.add("incorrect")
+          buttons[question.correct].classList.add("correct")
+        }
+
+        // Próxima questão após 1.5s
+        setTimeout(() => {
+          currentQuestion++
+          if (currentQuestion < questions.length) {
+            showQuestion()
+          } else {
+            endQuiz()
+          }
+        }, 1500)
+      }
+
+      // Timer
+      function startTimer() {
+        timerInterval = setInterval(() => {
+          timeRemaining--
+
+          const minutes = Math.floor(timeRemaining / 60)
+          const seconds = timeRemaining % 60
+          const timeText = `${minutes}:${seconds.toString().padStart(2, "0")}`
+
+          document.getElementById("time-remaining").textContent = timeText
+
+          // Alerta quando faltam 30s
+          const timerElement = document.getElementById("timer")
+          if (timeRemaining <= 30) {
+            timerElement.classList.add("warning")
+          }
+
+          if (timeRemaining <= 0) {
+            endQuiz()
+          }
+        }, 1000)
+      }
+
+      // Finalizar quiz
+      async function endQuiz() {
+        clearInterval(timerInterval)
+
+        const totalTime = Math.floor((Date.now() - startTime) / 1000)
+        const minutes = Math.floor(totalTime / 60)
+        const seconds = totalTime % 60
+
+        document.getElementById("quiz-screen").style.display = "none"
+        document.getElementById("result-screen").style.display = "block"
+
+        document.getElementById("final-score").textContent = score
+        document.getElementById(
+          "final-correct"
+        ).textContent = `${correctAnswers}/10`
+        document.getElementById(
+          "final-time"
+        ).textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`
+
+        // Mensagem baseada no desempenho
+        const percentage = (correctAnswers / questions.length) * 100
+        let icon, title, message
+
+        if (percentage >= 90) {
+          icon = "🏆"
+          title = "Excelente!"
+          message = "Você é um gênio da matemática!"
+        } else if (percentage >= 70) {
+          icon = "⭐"
+          title = "Muito Bom!"
+          message = "Continue praticando e você será imbatível!"
+        } else if (percentage >= 50) {
+          icon = "👍"
+          title = "Bom Trabalho!"
+          message = "Você está no caminho certo!"
+        } else {
+          icon = "💪"
+          title = "Continue Tentando!"
+          message = "A prática leva à perfeição!"
+        }
+
+        document.getElementById("result-icon").textContent = icon
+        document.getElementById("result-title").textContent = title
+        document.getElementById("result-message").textContent = message
+
+        // Enviar pontos para API de gamificação
+        try {
+          showLoader(true)
+          const user = JSON.parse(storage.get("user"))
+
+          // TODO: Substituir por chamada real
+          // await apiRequest('/gamificacao', {
+          //   method: 'POST',
+          //   body: JSON.stringify({
+          //     alunoId: user.id,
+          //     materia: 'Matemática',
+          //     pontos: score,
+          //     tipo: 'jogo',
+          //     detalhe: 'Quiz de Matemática'
+          //   })
+          // });
+
+          console.log(`Pontos enviados: ${score}`)
+        } catch (error) {
+          console.error("Erro ao enviar pontos:", error)
+        } finally {
+          showLoader(false)
+        }
+      }
+    </script>
+  </body>
+</html>

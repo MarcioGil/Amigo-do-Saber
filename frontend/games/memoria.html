@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jogo da Memória | Amigo do Saber</title>
+
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/variables.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/accessibility.css" />
+
+    <style>
+      .memory-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .memory-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-xl);
+      }
+
+      @media (max-width: 768px) {
+        .memory-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: var(--spacing-sm);
+        }
+      }
+
+      .memory-card {
+        aspect-ratio: 1;
+        background: linear-gradient(
+          135deg,
+          var(--primary-500),
+          var(--primary-700)
+        );
+        border-radius: var(--radius-lg);
+        cursor: pointer;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+        box-shadow: var(--shadow-md);
+      }
+
+      .memory-card.flipped {
+        transform: rotateY(180deg);
+      }
+
+      .memory-card.matched {
+        opacity: 0.6;
+        cursor: not-allowed;
+        animation: matchPulse 0.5s ease;
+      }
+
+      .memory-card:hover:not(.flipped):not(.matched) {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .card-face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-lg);
+        font-size: 2rem;
+        font-weight: 700;
+        padding: var(--spacing-sm);
+        text-align: center;
+      }
+
+      .card-front {
+        background: linear-gradient(
+          135deg,
+          var(--primary-500),
+          var(--primary-700)
+        );
+        color: white;
+      }
+
+      .card-back {
+        background: white;
+        color: var(--text-primary);
+        transform: rotateY(180deg);
+        border: 2px solid var(--primary-200);
+        font-size: 1.2rem;
+      }
+
+      @keyframes matchPulse {
+        0%,
+        100% {
+          transform: scale(1) rotateY(180deg);
+        }
+        50% {
+          transform: scale(1.1) rotateY(180deg);
+        }
+      }
+
+      .stats-bar {
+        display: flex;
+        justify-content: space-around;
+        background: var(--gray-50);
+        padding: var(--spacing-lg);
+        border-radius: var(--radius-lg);
+        margin-bottom: var(--spacing-xl);
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-value {
+        font-size: var(--text-2xl);
+        font-weight: 700;
+        color: var(--primary-600);
+      }
+
+      .stat-label {
+        font-size: var(--text-sm);
+        color: var(--text-secondary);
+        margin-top: var(--spacing-2xs);
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <a href="../index.html" class="logo">📚 Amigo do Saber</a>
+          <a href="index.html" class="btn btn-outline">← Voltar aos Jogos</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="section">
+      <div class="container memory-container">
+        <!-- Tela Inicial -->
+        <div
+          id="start-screen"
+          class="card"
+          style="text-align: center; padding: var(--spacing-2xl)"
+        >
+          <div style="font-size: 5rem; margin-bottom: var(--spacing-lg)">
+            🧠
+          </div>
+          <h1 style="margin-bottom: var(--spacing-md)">
+            Jogo da Memória - Ciências
+          </h1>
+          <p
+            style="
+              color: var(--text-secondary);
+              margin-bottom: var(--spacing-xl);
+              font-size: var(--text-lg);
+            "
+          >
+            Encontre os pares de cartas relacionados a conceitos científicos!
+          </p>
+
+          <div
+            style="
+              background: var(--ciencias-light);
+              padding: var(--spacing-lg);
+              border-radius: var(--radius-md);
+              margin-bottom: var(--spacing-xl);
+            "
+          >
+            <h3 style="margin-bottom: var(--spacing-sm)">🎯 Como Jogar</h3>
+            <ul
+              style="
+                text-align: left;
+                color: var(--text-secondary);
+                line-height: 1.8;
+              "
+            >
+              <li>✓ Clique em uma carta para virá-la</li>
+              <li>✓ Encontre o par correspondente</li>
+              <li>✓ Complete todas as duplas</li>
+              <li>✓ Quanto menos tentativas, mais pontos!</li>
+            </ul>
+          </div>
+
+          <div
+            style="
+              display: flex;
+              gap: var(--spacing-md);
+              justify-content: center;
+              flex-wrap: wrap;
+              margin-bottom: var(--spacing-xl);
+            "
+          >
+            <button class="btn btn-primary" onclick="startGame('easy')">
+              Fácil (8 cartas)
+            </button>
+            <button class="btn btn-primary" onclick="startGame('medium')">
+              Médio (12 cartas)
+            </button>
+            <button class="btn btn-primary" onclick="startGame('hard')">
+              Difícil (16 cartas)
+            </button>
+          </div>
+        </div>
+
+        <!-- Tela do Jogo -->
+        <div id="game-screen" style="display: none">
+          <!-- Estatísticas -->
+          <div class="stats-bar">
+            <div class="stat-item">
+              <div class="stat-value" id="moves-count">0</div>
+              <div class="stat-label">Tentativas</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="matches-count">0</div>
+              <div class="stat-label">Pares</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="timer">0:00</div>
+              <div class="stat-label">Tempo</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="score">0</div>
+              <div class="stat-label">Pontos</div>
+            </div>
+          </div>
+
+          <!-- Grid de Cartas -->
+          <div class="memory-grid" id="cards-grid">
+            <!-- Cartas serão inseridas aqui -->
+          </div>
+
+          <div style="text-align: center">
+            <button class="btn btn-outline" onclick="resetGame()">
+              Reiniciar Jogo
+            </button>
+          </div>
+        </div>
+
+        <!-- Tela de Resultado -->
+        <div
+          id="result-screen"
+          class="card"
+          style="display: none; text-align: center; padding: var(--spacing-2xl)"
+        >
+          <div style="font-size: 6rem; margin-bottom: var(--spacing-lg)">
+            🎉
+          </div>
+          <h1 style="margin-bottom: var(--spacing-md)">Parabéns!</h1>
+          <p
+            id="result-message"
+            style="
+              color: var(--text-secondary);
+              margin-bottom: var(--spacing-xl);
+              font-size: var(--text-lg);
+            "
+          ></p>
+
+          <div class="grid-3" style="margin-bottom: var(--spacing-xl)">
+            <div
+              style="
+                background: var(--success-50);
+                padding: var(--spacing-lg);
+                border-radius: var(--radius-md);
+              "
+            >
+              <p
+                style="
+                  font-size: var(--text-3xl);
+                  font-weight: 700;
+                  color: var(--success-600);
+                "
+                id="final-score"
+              >
+                0
+              </p>
+              <p
+                style="color: var(--text-secondary); font-size: var(--text-sm)"
+              >
+                Pontos
+              </p>
+            </div>
+            <div
+              style="
+                background: var(--primary-50);
+                padding: var(--spacing-lg);
+                border-radius: var(--radius-md);
+              "
+            >
+              <p
+                style="
+                  font-size: var(--text-3xl);
+                  font-weight: 700;
+                  color: var(--primary-600);
+                "
+                id="final-moves"
+              >
+                0
+              </p>
+              <p
+                style="color: var(--text-secondary); font-size: var(--text-sm)"
+              >
+                Tentativas
+              </p>
+            </div>
+            <div
+              style="
+                background: var(--warning-50);
+                padding: var(--spacing-lg);
+                border-radius: var(--radius-md);
+              "
+            >
+              <p
+                style="
+                  font-size: var(--text-3xl);
+                  font-weight: 700;
+                  color: var(--warning-600);
+                "
+                id="final-time"
+              >
+                0:00
+              </p>
+              <p
+                style="color: var(--text-secondary); font-size: var(--text-sm)"
+              >
+                Tempo
+              </p>
+            </div>
+          </div>
+
+          <div
+            style="
+              display: flex;
+              gap: var(--spacing-md);
+              justify-content: center;
+            "
+          >
+            <button class="btn btn-primary" onclick="resetToStart()">
+              Jogar Novamente
+            </button>
+            <a href="index.html" class="btn btn-outline">Outros Jogos</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+      // Pares de conceitos científicos
+      const cardPairs = {
+        easy: [
+          { id: 1, text: "🌞 Sol" },
+          { id: 2, text: "🌙 Lua" },
+          { id: 3, text: "💧 Água" },
+          { id: 4, text: "🔥 Fogo" },
+        ],
+        medium: [
+          { id: 1, text: "Fotossíntese" },
+          { id: 2, text: "Respiração" },
+          { id: 3, text: "Evaporação" },
+          { id: 4, text: "Condensação" },
+          { id: 5, text: "Átomo" },
+          { id: 6, text: "Molécula" },
+        ],
+        hard: [
+          { id: 1, text: "DNA" },
+          { id: 2, text: "RNA" },
+          { id: 3, text: "Célula" },
+          { id: 4, text: "Tecido" },
+          { id: 5, text: "Energia" },
+          { id: 6, text: "Movimento" },
+          { id: 7, text: "Gravidade" },
+          { id: 8, text: "Magnetismo" },
+        ],
+      }
+
+      // Estado do jogo
+      let cards = []
+      let flippedCards = []
+      let matchedPairs = 0
+      let moves = 0
+      let score = 0
+      let timerInterval = null
+      let startTime = null
+      let difficulty = "medium"
+
+      // Embaralhar array
+      function shuffle(array) {
+        const newArray = [...array]
+        for (let i = newArray.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1))
+          ;[newArray[i], newArray[j]] = [newArray[j], newArray[i]]
+        }
+        return newArray
+      }
+
+      // Iniciar jogo
+      function startGame(level) {
+        difficulty = level
+        const pairs = cardPairs[level]
+
+        // Criar pares de cartas
+        cards = []
+        pairs.forEach((pair) => {
+          cards.push({ ...pair, pairId: pair.id })
+          cards.push({ ...pair, pairId: pair.id })
+        })
+
+        // Embaralhar
+        cards = shuffle(cards)
+
+        // Resetar estado
+        flippedCards = []
+        matchedPairs = 0
+        moves = 0
+        score = 0
+        startTime = Date.now()
+
+        // Mostrar tela de jogo
+        document.getElementById("start-screen").style.display = "none"
+        document.getElementById("result-screen").style.display = "none"
+        document.getElementById("game-screen").style.display = "block"
+
+        // Renderizar cartas
+        renderCards()
+
+        // Iniciar timer
+        startTimer()
+      }
+
+      // Renderizar cartas
+      function renderCards() {
+        const grid = document.getElementById("cards-grid")
+        grid.innerHTML = cards
+          .map(
+            (card, index) => `
+        <div class="memory-card" data-index="${index}" onclick="flipCard(${index})">
+          <div class="card-face card-front">
+            🧠
+          </div>
+          <div class="card-face card-back">
+            ${card.text}
+          </div>
+        </div>
+      `
+          )
+          .join("")
+
+        // Ajustar grid baseado na dificuldade
+        if (difficulty === "easy") {
+          grid.style.gridTemplateColumns = "repeat(4, 1fr)"
+        } else if (difficulty === "medium") {
+          grid.style.gridTemplateColumns = "repeat(4, 1fr)"
+        } else {
+          grid.style.gridTemplateColumns = "repeat(4, 1fr)"
+        }
+      }
+
+      // Virar carta
+      function flipCard(index) {
+        const cardElement = document.querySelector(`[data-index="${index}"]`)
+
+        // Ignorar se já está virada ou combinada
+        if (
+          cardElement.classList.contains("flipped") ||
+          cardElement.classList.contains("matched") ||
+          flippedCards.length >= 2
+        ) {
+          return
+        }
+
+        // Virar carta
+        cardElement.classList.add("flipped")
+        flippedCards.push({ index, card: cards[index] })
+
+        // Checar se há duas cartas viradas
+        if (flippedCards.length === 2) {
+          moves++
+          document.getElementById("moves-count").textContent = moves
+
+          setTimeout(() => checkMatch(), 800)
+        }
+      }
+
+      // Checar combinação
+      function checkMatch() {
+        const [card1, card2] = flippedCards
+        const element1 = document.querySelector(`[data-index="${card1.index}"]`)
+        const element2 = document.querySelector(`[data-index="${card2.index}"]`)
+
+        if (
+          card1.card.pairId === card2.card.pairId &&
+          card1.index !== card2.index
+        ) {
+          // Combinação!
+          element1.classList.add("matched")
+          element2.classList.add("matched")
+
+          matchedPairs++
+          document.getElementById("matches-count").textContent = matchedPairs
+
+          // Calcular pontos (bonus por menos tentativas)
+          const pairBonus = 10
+          const moveBonus = Math.max(0, 5 - Math.floor(moves / matchedPairs))
+          score += pairBonus + moveBonus
+          document.getElementById("score").textContent = score
+
+          // Checar se terminou
+          if (matchedPairs === cards.length / 2) {
+            setTimeout(() => endGame(), 500)
+          }
+        } else {
+          // Não combinou - virar de volta
+          setTimeout(() => {
+            element1.classList.remove("flipped")
+            element2.classList.remove("flipped")
+          }, 500)
+        }
+
+        flippedCards = []
+      }
+
+      // Timer
+      function startTimer() {
+        timerInterval = setInterval(() => {
+          const elapsed = Math.floor((Date.now() - startTime) / 1000)
+          const minutes = Math.floor(elapsed / 60)
+          const seconds = elapsed % 60
+          document.getElementById("timer").textContent = `${minutes}:${seconds
+            .toString()
+            .padStart(2, "0")}`
+        }, 1000)
+      }
+
+      // Finalizar jogo
+      function endGame() {
+        clearInterval(timerInterval)
+
+        const totalTime = Math.floor((Date.now() - startTime) / 1000)
+        const minutes = Math.floor(totalTime / 60)
+        const seconds = totalTime % 60
+
+        // Bonus por tempo (máximo 20 pontos)
+        const timeBonus = Math.max(0, 20 - Math.floor(totalTime / 10))
+        score += timeBonus
+
+        document.getElementById("game-screen").style.display = "none"
+        document.getElementById("result-screen").style.display = "block"
+
+        document.getElementById("final-score").textContent = score
+        document.getElementById("final-moves").textContent = moves
+        document.getElementById(
+          "final-time"
+        ).textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`
+
+        // Mensagem baseada no desempenho
+        const efficiency = cards.length / (moves * 2)
+        let message
+
+        if (efficiency > 0.9) {
+          message = "Memória excepcional! Você é um cientista nato! 🧪"
+        } else if (efficiency > 0.75) {
+          message = "Ótima memória! Continue assim! 🌟"
+        } else if (efficiency > 0.6) {
+          message = "Bom trabalho! Sua memória está melhorando! 👍"
+        } else {
+          message = "Continue praticando! A memória pode ser treinada! 💪"
+        }
+
+        document.getElementById("result-message").textContent = message
+
+        // Enviar pontos (mock)
+        console.log(`Pontos ganhos: ${score}`)
+      }
+
+      // Resetar jogo
+      function resetGame() {
+        clearInterval(timerInterval)
+        startGame(difficulty)
+      }
+
+      // Voltar ao início
+      function resetToStart() {
+        clearInterval(timerInterval)
+        document.getElementById("result-screen").style.display = "none"
+        document.getElementById("start-screen").style.display = "block"
+      }
+    </script>
+  </body>
+</html>

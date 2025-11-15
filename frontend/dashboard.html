@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Dashboard do responsável - Amigo do Saber"
+    />
+    <title>Dashboard | Amigo do Saber</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/accessibility.css" />
+  </head>
+  <body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <a href="index.html" class="logo"> 📚 Amigo do Saber </a>
+
+          <nav class="nav" id="main-nav">
+            <a href="dashboard.html" class="nav-link active">Painel</a>
+            <a href="student-area.html" class="nav-link">Área do Aluno</a>
+            <a href="tia-dora.html" class="nav-link">Tia Dora</a>
+            <a href="#" class="nav-link" onclick="logout()">Sair</a>
+          </nav>
+
+          <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="section">
+      <div class="container">
+        <!-- Welcome -->
+        <div style="margin-bottom: var(--spacing-xl)">
+          <h1 style="margin-bottom: var(--spacing-xs)">
+            Bem-vindo, <span id="user-name">Responsável</span>! 👋
+          </h1>
+          <p style="color: var(--text-secondary)">
+            Acompanhe o progresso dos seus alunos
+          </p>
+        </div>
+
+        <!-- Resumo Rápido -->
+        <section class="grid-3" style="margin-bottom: var(--spacing-2xl)">
+          <div class="card">
+            <div
+              style="display: flex; align-items: center; gap: var(--spacing-md)"
+            >
+              <div style="font-size: 3rem">📊</div>
+              <div>
+                <p
+                  style="
+                    color: var(--text-secondary);
+                    font-size: var(--text-sm);
+                    margin-bottom: var(--spacing-2xs);
+                  "
+                >
+                  Exercícios esta semana
+                </p>
+                <p
+                  style="
+                    font-size: var(--text-2xl);
+                    font-weight: 700;
+                    color: var(--primary-600);
+                  "
+                  id="total-exercicios"
+                >
+                  --
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div
+              style="display: flex; align-items: center; gap: var(--spacing-md)"
+            >
+              <div style="font-size: 3rem">⏱️</div>
+              <div>
+                <p
+                  style="
+                    color: var(--text-secondary);
+                    font-size: var(--text-sm);
+                    margin-bottom: var(--spacing-2xs);
+                  "
+                >
+                  Tempo de estudo
+                </p>
+                <p
+                  style="
+                    font-size: var(--text-2xl);
+                    font-weight: 700;
+                    color: var(--success-600);
+                  "
+                  id="total-tempo"
+                >
+                  --
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div
+              style="display: flex; align-items: center; gap: var(--spacing-md)"
+            >
+              <div style="font-size: 3rem">🏆</div>
+              <div>
+                <p
+                  style="
+                    color: var(--text-secondary);
+                    font-size: var(--text-sm);
+                    margin-bottom: var(--spacing-2xs);
+                  "
+                >
+                  Badges conquistadas
+                </p>
+                <p
+                  style="
+                    font-size: var(--text-2xl);
+                    font-weight: 700;
+                    color: var(--warning-600);
+                  "
+                  id="total-badges"
+                >
+                  --
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Alunos Cadastrados -->
+        <section style="margin-bottom: var(--spacing-2xl)">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: var(--spacing-lg);
+            "
+          >
+            <h2>Meus Alunos</h2>
+            <button
+              class="btn btn-primary"
+              onclick="showModal('add-student-modal')"
+            >
+              + Adicionar Aluno
+            </button>
+          </div>
+
+          <div class="grid-3" id="students-grid">
+            <!-- Cards de alunos serão inseridos aqui via JS -->
+          </div>
+        </section>
+
+        <!-- Atividade Recente -->
+        <section style="margin-bottom: var(--spacing-2xl)">
+          <h2 style="margin-bottom: var(--spacing-lg)">Atividade Recente</h2>
+
+          <div class="card">
+            <ul id="recent-activity" style="list-style: none; padding: 0">
+              <!-- Atividades serão inseridas aqui via JS -->
+              <li
+                style="
+                  padding: var(--spacing-md) 0;
+                  border-bottom: 1px solid var(--gray-200);
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    gap: var(--spacing-md);
+                    align-items: start;
+                  "
+                >
+                  <div style="font-size: 1.5rem">📚</div>
+                  <div style="flex: 1">
+                    <p
+                      style="
+                        font-weight: 600;
+                        margin-bottom: var(--spacing-2xs);
+                      "
+                    >
+                      Carregando atividades...
+                    </p>
+                    <p
+                      style="
+                        font-size: var(--text-sm);
+                        color: var(--text-secondary);
+                      "
+                    >
+                      Aguarde...
+                    </p>
+                  </div>
+                  <span
+                    style="
+                      font-size: var(--text-sm);
+                      color: var(--text-tertiary);
+                    "
+                    >Agora</span
+                  >
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Engajamento Semanal -->
+        <section>
+          <h2 style="margin-bottom: var(--spacing-lg)">Engajamento Semanal</h2>
+
+          <div class="card">
+            <div
+              style="
+                display: flex;
+                gap: var(--spacing-md);
+                align-items: flex-end;
+                height: 200px;
+              "
+            >
+              <!-- Gráfico de barras simples -->
+              <div
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: var(--spacing-xs);
+                "
+              >
+                <div
+                  style="
+                    width: 100%;
+                    background: var(--primary-200);
+                    border-radius: var(--radius-md);
+                    height: var(--bar-seg, 30%);
+                  "
+                  data-day="Seg"
+                  aria-label="Segunda-feira: 30 minutos"
+                ></div>
+                <span
+                  style="
+                    font-size: var(--text-sm);
+                    color: var(--text-secondary);
+                  "
+                  >Seg</span
+                >
+              </div>
+              <div
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: var(--spacing-xs);
+                "
+              >
+                <div
+                  style="
+                    width: 100%;
+                    background: var(--primary-300);
+                    border-radius: var(--radius-md);
+                    height: var(--bar-ter, 45%);
+                  "
+                  data-day="Ter"
+                  aria-label="Terça-feira: 45 minutos"
+                ></div>
+                <span
+                  style="
+                    font-size: var(--text-sm);
+                    color: var(--text-secondary);
+                  "
+                  >Ter</span
+                >
+              </div>
+              <div
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: var(--spacing-xs);
+                "
+              >
+                <div
+                  style="
+                    width: 100%;
+                    background: var(--primary-400);
+                    border-radius: var(--radius-md);
+                    height: var(--bar-qua, 60%);
+                  "
+                  data-day="Qua"
+                  aria-label="Quarta-feira: 60 minutos"
+                ></div>
+                <span
+                  style="
+                    font-size: var(--text-sm);
+                    color: var(--text-secondary);
+                  "
+                  >Qua</span
+                >
+              </div>
+              <div
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: var(--spacing-xs);
+                "
+              >
+                <div
+                  style="
+                    width: 100%;
+                    background: var(--primary-500);
+                    border-radius: var(--radius-md);
+                    height: var(--bar-qui, 80%);
+                  "
+                  data-day="Qui"
+                  aria-label="Quinta-feira: 80 minutos"
+                ></div>
+                <span
+                  style="
+                    font-size: var(--text-sm);
+                    color: var(--text-secondary);
+                  "
+                  >Qui</span
+                >
+              </div>
+              <div
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: var(--spacing-xs);
+                "
+              >
+                <div
+                  style="
+                    width: 100%;
+                    background: var(--primary-600);
+                    border-radius: var(--radius-md);
+                    height: var(--bar-sex, 55%);
+                  "
+                  data-day="Sex"
+                  aria-label="Sexta-feira: 55 minutos"
+                ></div>
+                <span
+                  style="
+                    font-size: var(--text-sm);
+                    color: var(--text-secondary);
+                  "
+                  >Sex</span
+                >
+              </div>
+              <div
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: var(--spacing-xs);
+                "
+              >
+                <div
+                  style="
+                    width: 100%;
+                    background: var(--primary-200);
+                    border-radius: var(--radius-md);
+                    height: var(--bar-sab, 20%);
+                  "
+                  data-day="Sáb"
+                  aria-label="Sábado: 20 minutos"
+                ></div>
+                <span
+                  style="
+                    font-size: var(--text-sm);
+                    color: var(--text-secondary);
+                  "
+                  >Sáb</span
+                >
+              </div>
+              <div
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: var(--spacing-xs);
+                "
+              >
+                <div
+                  style="
+                    width: 100%;
+                    background: var(--primary-200);
+                    border-radius: var(--radius-md);
+                    height: var(--bar-dom, 15%);
+                  "
+                  data-day="Dom"
+                  aria-label="Domingo: 15 minutos"
+                ></div>
+                <span
+                  style="
+                    font-size: var(--text-sm);
+                    color: var(--text-secondary);
+                  "
+                  >Dom</span
+                >
+              </div>
+            </div>
+
+            <p
+              style="
+                text-align: center;
+                margin-top: var(--spacing-lg);
+                color: var(--text-secondary);
+                font-size: var(--text-sm);
+              "
+            >
+              Tempo de estudo (minutos por dia)
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Modal: Adicionar Aluno -->
+    <div id="add-student-modal" class="modal-overlay" style="display: none">
+      <div
+        class="modal"
+        role="dialog"
+        aria-labelledby="add-student-title"
+        aria-modal="true"
+      >
+        <div class="modal-header">
+          <h3 id="add-student-title">Adicionar Novo Aluno</h3>
+          <button
+            class="modal-close"
+            onclick="closeModal('add-student-modal')"
+            aria-label="Fechar modal"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="add-student-form">
+            <div class="form-group">
+              <label for="new-aluno-nome" class="form-label"
+                >Nome do aluno:</label
+              >
+              <input
+                type="text"
+                id="new-aluno-nome"
+                class="form-input"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="new-aluno-nascimento" class="form-label"
+                >Data de nascimento:</label
+              >
+              <input
+                type="date"
+                id="new-aluno-nascimento"
+                class="form-input"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="new-aluno-serie" class="form-label">Série:</label>
+              <select id="new-aluno-serie" class="form-select" required>
+                <option value="">Selecione...</option>
+                <option value="1º Ano">1º Ano</option>
+                <option value="2º Ano">2º Ano</option>
+                <option value="3º Ano">3º Ano</option>
+                <option value="4º Ano">4º Ano</option>
+                <option value="5º Ano">5º Ano</option>
+                <option value="6º Ano">6º Ano</option>
+                <option value="7º Ano">7º Ano</option>
+                <option value="8º Ano">8º Ano</option>
+                <option value="9º Ano">9º Ano</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn btn-outline"
+            onclick="closeModal('add-student-modal')"
+          >
+            Cancelar
+          </button>
+          <button class="btn btn-primary" onclick="addStudent()">
+            Adicionar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/accessibility.js"></script>
+    <script>
+      // Verificar autenticação
+      const user = storage.get("user")
+      if (!user) {
+        window.location.href = "login.html"
+      }
+
+      // Exibir nome do usuário
+      try {
+        const userData = JSON.parse(user)
+        document.getElementById("user-name").textContent =
+          userData.nome || "Responsável"
+      } catch (e) {
+        console.error("Erro ao parsear dados do usuário", e)
+      }
+
+      // Carregar dados do dashboard
+      async function loadDashboardData() {
+        showLoader(true)
+
+        try {
+          // Mock data - substituir por chamadas reais à API
+          const mockStudents = [
+            {
+              id: "aluno-1",
+              nome: "João Silva",
+              idade: 9,
+              serie: "4º Ano",
+              pontos: 1250,
+              nivel: "Aprendiz Avançado",
+              streak: 7,
+              badges: 3,
+              avatar: "👦",
+            },
+            {
+              id: "aluno-2",
+              nome: "Maria Clara",
+              idade: 11,
+              serie: "6º Ano",
+              pontos: 2800,
+              nivel: "Mestre",
+              streak: 15,
+              badges: 5,
+              avatar: "👧",
+            },
+          ]
+
+          // Renderizar cards de alunos
+          const studentsGrid = document.getElementById("students-grid")
+          studentsGrid.innerHTML = mockStudents
+            .map(
+              (aluno) => `
+          <div class="card">
+            <div style="text-align: center; margin-bottom: var(--spacing-md);">
+              <div class="avatar avatar-lg" style="font-size: 3rem; margin: 0 auto var(--spacing-sm);">
+                ${aluno.avatar}
+              </div>
+              <h3 style="margin-bottom: var(--spacing-2xs);">${aluno.nome}</h3>
+              <p style="color: var(--text-secondary); font-size: var(--text-sm);">
+                ${aluno.idade} anos • ${aluno.serie}
+              </p>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+              <div style="display: flex; justify-content: space-between;">
+                <span style="font-size: var(--text-sm); color: var(--text-secondary);">Nível:</span>
+                <span class="badge badge-primary">${aluno.nivel}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="font-size: var(--text-sm); color: var(--text-secondary);">Pontos:</span>
+                <strong>${aluno.pontos}</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="font-size: var(--text-sm); color: var(--text-secondary);">Sequência:</span>
+                <strong>${aluno.streak} 🔥</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="font-size: var(--text-sm); color: var(--text-secondary);">Badges:</span>
+                <strong>${aluno.badges} 🏆</strong>
+              </div>
+            </div>
+            
+            <a href="student-area.html?aluno=${aluno.id}" class="btn btn-primary" style="width: 100%;">
+              Ver Progresso
+            </a>
+          </div>
+        `
+            )
+            .join("")
+
+          // Atualizar estatísticas gerais
+          const totalExercicios = mockStudents.reduce(
+            (sum, a) => sum + Math.floor(a.pontos / 10),
+            0
+          )
+          const totalTempo = Math.floor(totalExercicios * 3.5)
+          const totalBadges = mockStudents.reduce((sum, a) => sum + a.badges, 0)
+
+          document.getElementById("total-exercicios").textContent =
+            totalExercicios
+          document.getElementById(
+            "total-tempo"
+          ).textContent = `${totalTempo}min`
+          document.getElementById("total-badges").textContent = totalBadges
+
+          // Carregar atividades recentes
+          loadRecentActivity()
+        } catch (error) {
+          console.error("Erro ao carregar dados:", error)
+          showToast("Erro ao carregar dados do dashboard", "error")
+        } finally {
+          showLoader(false)
+        }
+      }
+
+      // Carregar atividades recentes
+      function loadRecentActivity() {
+        const mockActivities = [
+          {
+            icon: "✅",
+            text: "João completou 5 exercícios de Matemática",
+            detail: "Taxa de acerto: 80%",
+            time: "Há 30 min",
+          },
+          {
+            icon: "🏆",
+            text: 'Maria desbloqueou o badge "Matemático"',
+            detail: "50 exercícios completados",
+            time: "Há 2h",
+          },
+          {
+            icon: "💬",
+            text: "João perguntou à Tia Dora sobre frações",
+            detail: "Conversou por 15 minutos",
+            time: "Há 3h",
+          },
+          {
+            icon: "🎯",
+            text: "Maria completou todas as missões diárias",
+            detail: "+150 pontos ganhos",
+            time: "Ontem",
+          },
+        ]
+
+        const activityList = document.getElementById("recent-activity")
+        activityList.innerHTML = mockActivities
+          .map(
+            (activity) => `
+        <li style="padding: var(--spacing-md) 0; border-bottom: 1px solid var(--gray-200);">
+          <div style="display: flex; gap: var(--spacing-md); align-items: start;">
+            <div style="font-size: 1.5rem;">${activity.icon}</div>
+            <div style="flex: 1;">
+              <p style="font-weight: 600; margin-bottom: var(--spacing-2xs);">${activity.text}</p>
+              <p style="font-size: var(--text-sm); color: var(--text-secondary);">${activity.detail}</p>
+            </div>
+            <span style="font-size: var(--text-sm); color: var(--text-tertiary);">${activity.time}</span>
+          </div>
+        </li>
+      `
+          )
+          .join("")
+      }
+
+      // Adicionar novo aluno
+      async function addStudent() {
+        const form = document.getElementById("add-student-form")
+
+        if (!window.app.validateForm(form)) {
+          return
+        }
+
+        const nome = document.getElementById("new-aluno-nome").value
+        const nascimento = document.getElementById("new-aluno-nascimento").value
+        const serie = document.getElementById("new-aluno-serie").value
+
+        showLoader(true)
+
+        try {
+          // TODO: Chamar API para adicionar aluno
+          await new Promise((resolve) => setTimeout(resolve, 1000))
+
+          showToast("Aluno adicionado com sucesso! 🎉", "success")
+          closeModal("add-student-modal")
+          form.reset()
+
+          // Recarregar dados
+          loadDashboardData()
+        } catch (error) {
+          showToast("Erro ao adicionar aluno", "error")
+        } finally {
+          showLoader(false)
+        }
+      }
+
+      // Logout
+      function logout() {
+        storage.remove("user")
+        storage.remove("authToken")
+        window.location.href = "login.html"
+      }
+
+      // Carregar dados ao iniciar
+      loadDashboardData()
+    </script>
+  </body>
+</html>

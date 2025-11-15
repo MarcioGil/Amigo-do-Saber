@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "ms-vscode.vscode-node-azure-pack",
+    "ms-azuretools.vscode-azurefunctions",
+    "ms-azuretools.vscode-cosmosdb",
+    "ms-azuretools.vscode-azurestaticwebapps",
+    "github.vscode-github-actions",
+    "ms-python.python",
+    "ms-vscode.azure-account",
+    "ritwickdey.liveserver",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint"
+  ]
+}

@@ -68,15 +68,15 @@ Edite `local.settings.json`:
 Para produção, use Azure Key Vault:
 
 ```javascript
-const { SecretClient } = require("@azure/keyvault-secrets");
-const { DefaultAzureCredential } = require("@azure/identity");
+const { SecretClient } = require("@azure/keyvault-secrets")
+const { DefaultAzureCredential } = require("@azure/identity")
 
 const client = new SecretClient(
   "https://kv-amigodosaber.vault.azure.net",
   new DefaultAzureCredential()
-);
+)
 
-const secret = await client.getSecret("CosmosDBKey");
+const secret = await client.getSecret("CosmosDBKey")
 ```
 
 ## 🧪 Testes
@@ -97,9 +97,11 @@ npm run deploy
 ## 📚 APIs Disponíveis
 
 ### POST /api/CadastroResponsavel
+
 Cadastra responsável e aluno.
 
 **Body:**
+
 ```json
 {
   "responsavel": {
@@ -117,14 +119,17 @@ Cadastra responsável e aluno.
 ```
 
 ### POST /api/PerguntarProfessora
+
 Envia pergunta para a professora virtual.
 
 **Headers:**
+
 ```
 Authorization: Bearer {token}
 ```
 
 **Body:**
+
 ```json
 {
   "alunoId": "uuid",
@@ -137,9 +142,11 @@ Authorization: Bearer {token}
 ```
 
 ### GET /api/Progresso/{alunoId}
+
 Busca progresso do aluno.
 
 **Response:**
+
 ```json
 {
   "aluno": {...},
@@ -159,6 +166,7 @@ Busca progresso do aluno.
 ## 📊 Monitoramento
 
 Logs e métricas no Azure Application Insights:
+
 - Performance de APIs
 - Erros e exceções
 - Uso de recursos
@@ -167,12 +175,15 @@ Logs e métricas no Azure Application Insights:
 ## 🆘 Troubleshooting
 
 ### Erro: Cannot connect to Cosmos DB
+
 ✅ Verifique COSMOS_ENDPOINT e COSMOS_KEY no local.settings.json
 
 ### Erro: OpenAI quota exceeded
+
 ✅ Verifique seu plano Azure OpenAI ou use GPT-3.5-Turbo
 
 ### Functions não aparecem no portal
+
 ✅ Verifique se fez deploy para o Function App correto
 
 ---

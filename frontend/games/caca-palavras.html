@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Caça-Palavras | Amigo do Saber</title>
+
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/variables.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/accessibility.css" />
+
+    <style>
+      .word-search-container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .game-layout {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: var(--spacing-xl);
+        margin-bottom: var(--spacing-xl);
+      }
+
+      @media (max-width: 768px) {
+        .game-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .grid-container {
+        background: white;
+        padding: var(--spacing-lg);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+      }
+
+      .letter-grid {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        gap: 4px;
+        margin-bottom: var(--spacing-md);
+        user-select: none;
+      }
+
+      .letter-cell {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--gray-100);
+        border: 2px solid var(--gray-200);
+        border-radius: var(--radius-sm);
+        font-weight: 700;
+        font-size: var(--text-lg);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+      }
+
+      .letter-cell:hover {
+        background: var(--primary-100);
+        border-color: var(--primary-300);
+        transform: scale(1.05);
+      }
+
+      .letter-cell.selected {
+        background: var(--primary-200);
+        border-color: var(--primary-400);
+      }
+
+      .letter-cell.found {
+        background: var(--success-200);
+        border-color: var(--success-400);
+        color: var(--success-800);
+      }
+
+      .words-list {
+        background: white;
+        padding: var(--spacing-lg);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+      }
+
+      .word-item {
+        padding: var(--spacing-sm) var(--spacing-md);
+        margin-bottom: var(--spacing-sm);
+        background: var(--gray-50);
+        border-radius: var(--radius-md);
+        border-left: 4px solid var(--primary-500);
+        transition: all var(--transition-base);
+      }
+
+      .word-item.found {
+        background: var(--success-50);
+        border-left-color: var(--success-500);
+        text-decoration: line-through;
+        opacity: 0.7;
+      }
+
+      .word-item.found::after {
+        content: " ✓";
+        color: var(--success-600);
+        font-weight: 700;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .stat-box {
+        text-align: center;
+        padding: var(--spacing-md);
+        background: var(--primary-50);
+        border-radius: var(--radius-md);
+      }
+
+      .stat-value {
+        font-size: var(--text-2xl);
+        font-weight: 700;
+        color: var(--primary-600);
+      }
+
+      .stat-label {
+        font-size: var(--text-sm);
+        color: var(--text-secondary);
+        margin-top: var(--spacing-2xs);
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <a href="../index.html" class="logo">📚 Amigo do Saber</a>
+          <a href="index.html" class="btn btn-outline">← Voltar aos Jogos</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="section">
+      <div class="container word-search-container">
+        <!-- Tela Inicial -->
+        <div
+          id="start-screen"
+          class="card"
+          style="text-align: center; padding: var(--spacing-2xl)"
+        >
+          <div style="font-size: 5rem; margin-bottom: var(--spacing-lg)">
+            🔍
+          </div>
+          <h1 style="margin-bottom: var(--spacing-md)">
+            Caça-Palavras - Português
+          </h1>
+          <p
+            style="
+              color: var(--text-secondary);
+              margin-bottom: var(--spacing-xl);
+              font-size: var(--text-lg);
+            "
+          >
+            Encontre todas as palavras escondidas no tabuleiro!
+          </p>
+
+          <div
+            style="
+              background: var(--portugues-light);
+              padding: var(--spacing-lg);
+              border-radius: var(--radius-md);
+              margin-bottom: var(--spacing-xl);
+            "
+          >
+            <h3 style="margin-bottom: var(--spacing-sm)">🎯 Como Jogar</h3>
+            <ul
+              style="
+                text-align: left;
+                color: var(--text-secondary);
+                line-height: 1.8;
+              "
+            >
+              <li>✓ Clique e arraste sobre as letras</li>
+              <li>
+                ✓ Palavras podem estar na horizontal, vertical ou diagonal
+              </li>
+              <li>✓ Encontre todas as 8 palavras</li>
+              <li>✓ Quanto mais rápido, mais pontos!</li>
+            </ul>
+          </div>
+
+          <button
+            class="btn btn-primary"
+            style="
+              font-size: var(--text-lg);
+              padding: var(--spacing-md) var(--spacing-2xl);
+            "
+            onclick="startGame()"
+          >
+            Começar Jogo 🚀
+          </button>
+        </div>
+
+        <!-- Tela do Jogo -->
+        <div id="game-screen" style="display: none">
+          <!-- Estatísticas -->
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-value" id="words-found">0/8</div>
+              <div class="stat-label">Palavras</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value" id="timer">0:00</div>
+              <div class="stat-label">Tempo</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value" id="score">0</div>
+              <div class="stat-label">Pontos</div>
+            </div>
+          </div>
+
+          <!-- Layout do Jogo -->
+          <div class="game-layout">
+            <!-- Grade de Letras -->
+            <div class="grid-container">
+              <h3 style="margin-bottom: var(--spacing-md)">Tabuleiro</h3>
+              <div class="letter-grid" id="letter-grid">
+                <!-- Grid será gerado via JS -->
+              </div>
+              <p
+                style="
+                  font-size: var(--text-sm);
+                  color: var(--text-secondary);
+                  text-align: center;
+                "
+              >
+                Clique e arraste para selecionar palavras
+              </p>
+            </div>
+
+            <!-- Lista de Palavras -->
+            <div class="words-list">
+              <h3 style="margin-bottom: var(--spacing-md)">
+                Palavras para Encontrar
+              </h3>
+              <div id="words-list">
+                <!-- Palavras serão inseridas via JS -->
+              </div>
+              <button
+                class="btn btn-outline"
+                style="width: 100%; margin-top: var(--spacing-md)"
+                onclick="giveHint()"
+              >
+                💡 Dica
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tela de Resultado -->
+        <div
+          id="result-screen"
+          class="card"
+          style="display: none; text-align: center; padding: var(--spacing-2xl)"
+        >
+          <div style="font-size: 6rem; margin-bottom: var(--spacing-lg)">
+            🎉
+          </div>
+          <h1 style="margin-bottom: var(--spacing-md)">Parabéns!</h1>
+          <p
+            style="
+              color: var(--text-secondary);
+              margin-bottom: var(--spacing-xl);
+              font-size: var(--text-lg);
+            "
+          >
+            Você encontrou todas as palavras!
+          </p>
+
+          <div class="grid-3" style="margin-bottom: var(--spacing-xl)">
+            <div
+              style="
+                background: var(--success-50);
+                padding: var(--spacing-lg);
+                border-radius: var(--radius-md);
+              "
+            >
+              <p
+                style="
+                  font-size: var(--text-3xl);
+                  font-weight: 700;
+                  color: var(--success-600);
+                "
+                id="final-score"
+              >
+                0
+              </p>
+              <p
+                style="color: var(--text-secondary); font-size: var(--text-sm)"
+              >
+                Pontos
+              </p>
+            </div>
+            <div
+              style="
+                background: var(--primary-50);
+                padding: var(--spacing-lg);
+                border-radius: var(--radius-md);
+              "
+            >
+              <p
+                style="
+                  font-size: var(--text-3xl);
+                  font-weight: 700;
+                  color: var(--primary-600);
+                "
+              >
+                8
+              </p>
+              <p
+                style="color: var(--text-secondary); font-size: var(--text-sm)"
+              >
+                Palavras
+              </p>
+            </div>
+            <div
+              style="
+                background: var(--warning-50);
+                padding: var(--spacing-lg);
+                border-radius: var(--radius-md);
+              "
+            >
+              <p
+                style="
+                  font-size: var(--text-3xl);
+                  font-weight: 700;
+                  color: var(--warning-600);
+                "
+                id="final-time"
+              >
+                0:00
+              </p>
+              <p
+                style="color: var(--text-secondary); font-size: var(--text-sm)"
+              >
+                Tempo
+              </p>
+            </div>
+          </div>
+
+          <div
+            style="
+              display: flex;
+              gap: var(--spacing-md);
+              justify-content: center;
+            "
+          >
+            <button class="btn btn-primary" onclick="startGame()">
+              Jogar Novamente
+            </button>
+            <a href="index.html" class="btn btn-outline">Outros Jogos</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+      const GRID_SIZE = 10
+      const words = [
+        "VERBO",
+        "ADJETIVO",
+        "SUBSTANTIVO",
+        "PRONOME",
+        "ARTIGO",
+        "SUJEITO",
+        "PREDICADO",
+        "POESIA",
+      ]
+
+      let grid = []
+      let wordPositions = []
+      let foundWords = []
+      let isSelecting = false
+      let selectedCells = []
+      let score = 0
+      let timerInterval = null
+      let startTime = null
+      let hintsUsed = 0
+
+      // Iniciar jogo
+      function startGame() {
+        foundWords = []
+        score = 0
+        hintsUsed = 0
+        startTime = Date.now()
+
+        document.getElementById("start-screen").style.display = "none"
+        document.getElementById("result-screen").style.display = "none"
+        document.getElementById("game-screen").style.display = "block"
+
+        generateGrid()
+        renderGrid()
+        renderWordsList()
+        startTimer()
+      }
+
+      // Gerar grade
+      function generateGrid() {
+        // Inicializar grade vazia
+        grid = Array(GRID_SIZE)
+          .fill(null)
+          .map(() => Array(GRID_SIZE).fill(""))
+        wordPositions = []
+
+        // Colocar palavras
+        words.forEach((word) => {
+          let placed = false
+          let attempts = 0
+
+          while (!placed && attempts < 100) {
+            const direction = Math.floor(Math.random() * 3) // 0=horizontal, 1=vertical, 2=diagonal
+            const row = Math.floor(Math.random() * GRID_SIZE)
+            const col = Math.floor(Math.random() * GRID_SIZE)
+
+            if (canPlaceWord(word, row, col, direction)) {
+              placeWord(word, row, col, direction)
+              placed = true
+            }
+            attempts++
+          }
+        })
+
+        // Preencher espaços vazios
+        for (let i = 0; i < GRID_SIZE; i++) {
+          for (let j = 0; j < GRID_SIZE; j++) {
+            if (!grid[i][j]) {
+              grid[i][j] = String.fromCharCode(
+                65 + Math.floor(Math.random() * 26)
+              )
+            }
+          }
+        }
+      }
+
+      // Verificar se pode colocar palavra
+      function canPlaceWord(word, row, col, direction) {
+        const len = word.length
+
+        if (direction === 0) {
+          // Horizontal
+          if (col + len > GRID_SIZE) return false
+          for (let i = 0; i < len; i++) {
+            if (grid[row][col + i] && grid[row][col + i] !== word[i])
+              return false
+          }
+        } else if (direction === 1) {
+          // Vertical
+          if (row + len > GRID_SIZE) return false
+          for (let i = 0; i < len; i++) {
+            if (grid[row + i][col] && grid[row + i][col] !== word[i])
+              return false
+          }
+        } else {
+          // Diagonal
+          if (row + len > GRID_SIZE || col + len > GRID_SIZE) return false
+          for (let i = 0; i < len; i++) {
+            if (grid[row + i][col + i] && grid[row + i][col + i] !== word[i])
+              return false
+          }
+        }
+
+        return true
+      }
+
+      // Colocar palavra
+      function placeWord(word, row, col, direction) {
+        const positions = []
+
+        for (let i = 0; i < word.length; i++) {
+          let r = row
+          let c = col
+
+          if (direction === 0) c += i
+          else if (direction === 1) r += i
+          else {
+            r += i
+            c += i
+          }
+
+          grid[r][c] = word[i]
+          positions.push({ row: r, col: c })
+        }
+
+        wordPositions.push({ word, positions })
+      }
+
+      // Renderizar grade
+      function renderGrid() {
+        const gridElement = document.getElementById("letter-grid")
+        gridElement.innerHTML = ""
+
+        for (let i = 0; i < GRID_SIZE; i++) {
+          for (let j = 0; j < GRID_SIZE; j++) {
+            const cell = document.createElement("div")
+            cell.className = "letter-cell"
+            cell.textContent = grid[i][j]
+            cell.dataset.row = i
+            cell.dataset.col = j
+
+            cell.addEventListener("mousedown", startSelection)
+            cell.addEventListener("mouseenter", continueSelection)
+            cell.addEventListener("mouseup", endSelection)
+
+            gridElement.appendChild(cell)
+          }
+        }
+
+        document.addEventListener("mouseup", endSelection)
+      }
+
+      // Renderizar lista de palavras
+      function renderWordsList() {
+        const listElement = document.getElementById("words-list")
+        listElement.innerHTML = words
+          .map(
+            (word) => `
+        <div class="word-item ${
+          foundWords.includes(word) ? "found" : ""
+        }" data-word="${word}">
+          ${word}
+        </div>
+      `
+          )
+          .join("")
+
+        updateStats()
+      }
+
+      // Seleção de células
+      function startSelection(e) {
+        isSelecting = true
+        selectedCells = [e.target]
+        e.target.classList.add("selected")
+      }
+
+      function continueSelection(e) {
+        if (!isSelecting) return
+
+        if (!selectedCells.includes(e.target)) {
+          selectedCells.push(e.target)
+          e.target.classList.add("selected")
+        }
+      }
+
+      function endSelection() {
+        if (!isSelecting) return
+        isSelecting = false
+
+        checkSelectedWord()
+
+        // Limpar seleção
+        selectedCells.forEach((cell) => cell.classList.remove("selected"))
+        selectedCells = []
+      }
+
+      // Verificar palavra selecionada
+      function checkSelectedWord() {
+        const selectedWord = selectedCells
+          .map((cell) => cell.textContent)
+          .join("")
+
+        // Verificar palavra ou reverso
+        const foundWord = wordPositions.find(
+          (wp) =>
+            wp.word === selectedWord ||
+            wp.word === selectedWord.split("").reverse().join("")
+        )
+
+        if (foundWord && !foundWords.includes(foundWord.word)) {
+          // Palavra encontrada!
+          foundWords.push(foundWord.word)
+
+          // Marcar células como encontradas
+          selectedCells.forEach((cell) => cell.classList.add("found"))
+
+          // Calcular pontos (bonus por velocidade)
+          const timeBonus = Math.max(0, 10 - hintsUsed * 2)
+          score += 5 + timeBonus
+
+          renderWordsList()
+
+          // Verificar se terminou
+          if (foundWords.length === words.length) {
+            setTimeout(() => endGame(), 500)
+          }
+        }
+      }
+
+      // Dica
+      function giveHint() {
+        const remaining = wordPositions.filter(
+          (wp) => !foundWords.includes(wp.word)
+        )
+
+        if (remaining.length === 0) return
+
+        const hintWord = remaining[0]
+        const firstCell = hintWord.positions[0]
+
+        const cell = document.querySelector(
+          `[data-row="${firstCell.row}"][data-col="${firstCell.col}"]`
+        )
+        cell.style.background = "var(--warning-200)"
+
+        setTimeout(() => {
+          cell.style.background = ""
+        }, 2000)
+
+        hintsUsed++
+        score = Math.max(0, score - 5)
+        updateStats()
+      }
+
+      // Timer
+      function startTimer() {
+        timerInterval = setInterval(() => {
+          const elapsed = Math.floor((Date.now() - startTime) / 1000)
+          const minutes = Math.floor(elapsed / 60)
+          const seconds = elapsed % 60
+          document.getElementById("timer").textContent = `${minutes}:${seconds
+            .toString()
+            .padStart(2, "0")}`
+        }, 1000)
+      }
+
+      // Atualizar estatísticas
+      function updateStats() {
+        document.getElementById(
+          "words-found"
+        ).textContent = `${foundWords.length}/${words.length}`
+        document.getElementById("score").textContent = score
+      }
+
+      // Finalizar jogo
+      function endGame() {
+        clearInterval(timerInterval)
+
+        const totalTime = Math.floor((Date.now() - startTime) / 1000)
+        const minutes = Math.floor(totalTime / 60)
+        const seconds = totalTime % 60
+
+        // Bonus por tempo
+        const timeBonus = Math.max(0, 20 - Math.floor(totalTime / 30))
+        score += timeBonus
+
+        document.getElementById("game-screen").style.display = "none"
+        document.getElementById("result-screen").style.display = "block"
+
+        document.getElementById("final-score").textContent = score
+        document.getElementById(
+          "final-time"
+        ).textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`
+
+        console.log(`Pontos ganhos: ${score}`)
+      }
+    </script>
+  </body>
+</html>

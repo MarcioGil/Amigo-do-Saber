@@ -1,0 +1,294 @@
+/* ==============================================
+   ACCESSIBILITY STYLES
+   ============================================== */
+
+/* Screen Reader Only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Focus Styles */
+*:focus {
+  outline: 3px solid var(--primary-300);
+  outline-offset: 2px;
+}
+
+.focus-visible:focus {
+  outline: 3px solid var(--primary-500);
+}
+
+/* Skip Links */
+.skip-links {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: var(--z-modal);
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary-600);
+  color: white;
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 0 0 var(--radius-md) 0;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid white;
+}
+
+/* High Contrast Mode */
+.high-contrast {
+  --text-primary: #000000;
+  --text-secondary: #000000;
+  --bg-primary: #ffffff;
+  --primary-500: #0000ff;
+  --primary-600: #0000cc;
+  --success-500: #008000;
+  --error-500: #ff0000;
+  --warning-500: #ff8800;
+}
+
+.high-contrast * {
+  border-color: currentColor !important;
+  background-image: none !important;
+}
+
+.high-contrast .btn {
+  border: 3px solid currentColor;
+}
+
+.high-contrast a {
+  text-decoration: underline;
+}
+
+/* Font Size Controls */
+.font-size-small {
+  font-size: 14px;
+}
+
+.font-size-medium {
+  font-size: 16px;
+}
+
+.font-size-large {
+  font-size: 18px;
+}
+
+.font-size-xlarge {
+  font-size: 20px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --text-tertiary: #808080;
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2a2a2a;
+    --gray-50: #2a2a2a;
+    --gray-100: #3a3a3a;
+    --gray-200: #4a4a4a;
+    --gray-300: #5a5a5a;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+
+  .card,
+  .modal,
+  .header {
+    background: var(--bg-secondary);
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    background: var(--gray-100);
+    color: var(--text-primary);
+    border-color: var(--gray-300);
+  }
+}
+
+/* Touch Target Size */
+button,
+a,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+select {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Mobile Touch Targets (48x48) */
+@media (max-width: 768px) {
+  button,
+  a,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  select {
+    min-width: 48px;
+    min-height: 48px;
+  }
+}
+
+/* Keyboard Navigation Helpers */
+.keyboard-nav *:focus {
+  outline: 3px solid var(--primary-500);
+  outline-offset: 3px;
+}
+
+/* ARIA Live Regions */
+[aria-live] {
+  position: relative;
+}
+
+/* Accessibility Controls Panel */
+.accessibility-panel {
+  position: fixed;
+  bottom: var(--spacing-lg);
+  right: var(--spacing-lg);
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-md);
+  z-index: var(--z-dropdown);
+  display: none;
+}
+
+.accessibility-panel.open {
+  display: block;
+}
+
+.accessibility-toggle {
+  position: fixed;
+  bottom: var(--spacing-lg);
+  right: var(--spacing-lg);
+  width: 56px;
+  height: 56px;
+  background: var(--primary-500);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: var(--text-2xl);
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-dropdown);
+  transition: all var(--transition-normal);
+}
+
+.accessibility-toggle:hover {
+  background: var(--primary-600);
+  transform: scale(1.1);
+}
+
+.accessibility-toggle:focus {
+  outline: 3px solid white;
+  outline-offset: 3px;
+}
+
+.accessibility-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.accessibility-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+.accessibility-option label {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Color Blind Friendly */
+.colorblind-mode {
+  filter: grayscale(0%);
+}
+
+.colorblind-mode.protanopia {
+  filter: url("#protanopia-filter");
+}
+
+.colorblind-mode.deuteranopia {
+  filter: url("#deuteranopia-filter");
+}
+
+.colorblind-mode.tritanopia {
+  filter: url("#tritanopia-filter");
+}
+
+/* High Contrast Borders */
+.high-contrast-borders * {
+  border: 2px solid currentColor;
+}
+
+/* Underline Links */
+.underline-links a {
+  text-decoration: underline;
+}
+
+/* Larger Line Height for Dyslexia */
+.dyslexia-friendly {
+  line-height: 2;
+  letter-spacing: 0.05em;
+  word-spacing: 0.2em;
+}
+
+/* Focus Indicators with Animation */
+@keyframes focusPulse {
+  0%,
+  100% {
+    outline-width: 2px;
+  }
+  50% {
+    outline-width: 4px;
+  }
+}
+
+.focus-pulse:focus {
+  animation: focusPulse 2s infinite;
+}
