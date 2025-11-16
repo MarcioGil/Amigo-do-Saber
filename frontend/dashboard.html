@@ -55,6 +55,29 @@
           </p>
         </div>
 
+        <!-- Gráficos Interativos -->
+        <section style="margin-bottom: var(--spacing-2xl)">
+          <h2>Progresso dos Alunos</h2>
+          <canvas id="progressChart" width="400" height="200" aria-label="Gráfico de progresso dos alunos" role="img"></canvas>
+        </section>
+        <section style="margin-bottom: var(--spacing-2xl)">
+          <h2>Engajamento</h2>
+          <canvas id="engagementChart" width="400" height="200" aria-label="Gráfico de engajamento" role="img"></canvas>
+        </section>
+
+        <!-- Feedback dos Usuários -->
+        <section style="margin-bottom: var(--spacing-2xl)">
+          <h2>Feedback dos Usuários</h2>
+          <div id="feedback-list"></div>
+          <form id="feedback-form" style="margin-top: var(--spacing-md)">
+            <label for="feedback-nome">Seu nome:</label>
+            <input type="text" id="feedback-nome" name="nome" required />
+            <label for="feedback-comentario">Comentário:</label>
+            <textarea id="feedback-comentario" name="comentario" required></textarea>
+            <button type="submit">Enviar feedback</button>
+          </form>
+        </section>
+
         <!-- Resumo Rápido -->
         <section class="grid-3" style="margin-bottom: var(--spacing-2xl)">
           <div class="card">
@@ -517,213 +540,83 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/config.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/main.js"></script>
     <script src="js/accessibility.js"></script>
     <script>
-      // Verificar autenticação
-      const user = storage.get("user")
-      if (!user) {
-        window.location.href = "login.html"
-      }
-
-      // Exibir nome do usuário
-      try {
-        const userData = JSON.parse(user)
-        document.getElementById("user-name").textContent =
-          userData.nome || "Responsável"
-      } catch (e) {
-        console.error("Erro ao parsear dados do usuário", e)
-      }
-
-      // Carregar dados do dashboard
-      async function loadDashboardData() {
-        showLoader(true)
-
-        try {
-          // Mock data - substituir por chamadas reais à API
-          const mockStudents = [
-            {
-              id: "aluno-1",
-              nome: "João Silva",
-              idade: 9,
-              serie: "4º Ano",
-              pontos: 1250,
-              nivel: "Aprendiz Avançado",
-              streak: 7,
-              badges: 3,
-              avatar: "👦",
-            },
-            {
-              id: "aluno-2",
-              nome: "Maria Clara",
-              idade: 11,
-              serie: "6º Ano",
-              pontos: 2800,
-              nivel: "Mestre",
-              streak: 15,
-              badges: 5,
-              avatar: "👧",
-            },
-          ]
-
-          // Renderizar cards de alunos
-          const studentsGrid = document.getElementById("students-grid")
-          studentsGrid.innerHTML = mockStudents
-            .map(
-              (aluno) => `
-          <div class="card">
-            <div style="text-align: center; margin-bottom: var(--spacing-md);">
-              <div class="avatar avatar-lg" style="font-size: 3rem; margin: 0 auto var(--spacing-sm);">
-                ${aluno.avatar}
-              </div>
-              <h3 style="margin-bottom: var(--spacing-2xs);">${aluno.nome}</h3>
-              <p style="color: var(--text-secondary); font-size: var(--text-sm);">
-                ${aluno.idade} anos • ${aluno.serie}
-              </p>
-            </div>
-            
-            <div style="display: flex; flex-direction: column; gap: var(--spacing-sm); margin-bottom: var(--spacing-md);">
-              <div style="display: flex; justify-content: space-between;">
-                <span style="font-size: var(--text-sm); color: var(--text-secondary);">Nível:</span>
-                <span class="badge badge-primary">${aluno.nivel}</span>
-              </div>
-              <div style="display: flex; justify-content: space-between;">
-                <span style="font-size: var(--text-sm); color: var(--text-secondary);">Pontos:</span>
-                <strong>${aluno.pontos}</strong>
-              </div>
-              <div style="display: flex; justify-content: space-between;">
-                <span style="font-size: var(--text-sm); color: var(--text-secondary);">Sequência:</span>
-                <strong>${aluno.streak} 🔥</strong>
-              </div>
-              <div style="display: flex; justify-content: space-between;">
-                <span style="font-size: var(--text-sm); color: var(--text-secondary);">Badges:</span>
-                <strong>${aluno.badges} 🏆</strong>
-              </div>
-            </div>
-            
-            <a href="student-area.html?aluno=${aluno.id}" class="btn btn-primary" style="width: 100%;">
-              Ver Progresso
-            </a>
-          </div>
-        `
-            )
-            .join("")
-
-          // Atualizar estatísticas gerais
-          const totalExercicios = mockStudents.reduce(
-            (sum, a) => sum + Math.floor(a.pontos / 10),
-            0
-          )
-          const totalTempo = Math.floor(totalExercicios * 3.5)
-          const totalBadges = mockStudents.reduce((sum, a) => sum + a.badges, 0)
-
-          document.getElementById("total-exercicios").textContent =
-            totalExercicios
-          document.getElementById(
-            "total-tempo"
-          ).textContent = `${totalTempo}min`
-          document.getElementById("total-badges").textContent = totalBadges
-
-          // Carregar atividades recentes
-          loadRecentActivity()
-        } catch (error) {
-          console.error("Erro ao carregar dados:", error)
-          showToast("Erro ao carregar dados do dashboard", "error")
-        } finally {
-          showLoader(false)
+      // Gráficos interativos
+      const progressData = {
+        labels: ['Matemática', 'Português', 'Ciências', 'História', 'Geografia', 'Inglês'],
+        datasets: [{
+          label: 'Progresso (%)',
+          data: [80, 70, 65, 90, 60, 75],
+          backgroundColor: 'rgba(54, 162, 235, 0.5)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      };
+      const engagementData = {
+        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+        datasets: [{
+          label: 'Acessos',
+          data: [120, 150, 180, 200, 170, 210],
+          backgroundColor: 'rgba(255, 206, 86, 0.5)',
+          borderColor: 'rgba(255, 206, 86, 1)',
+          borderWidth: 1
+        }]
+      };
+      window.addEventListener('DOMContentLoaded', () => {
+        if (document.getElementById('progressChart')) {
+          new Chart(document.getElementById('progressChart'), {
+            type: 'bar',
+            data: progressData,
+            options: {
+              responsive: true,
+              plugins: { legend: { display: false } }
+            }
+          });
         }
-      }
-
-      // Carregar atividades recentes
-      function loadRecentActivity() {
-        const mockActivities = [
-          {
-            icon: "✅",
-            text: "João completou 5 exercícios de Matemática",
-            detail: "Taxa de acerto: 80%",
-            time: "Há 30 min",
-          },
-          {
-            icon: "🏆",
-            text: 'Maria desbloqueou o badge "Matemático"',
-            detail: "50 exercícios completados",
-            time: "Há 2h",
-          },
-          {
-            icon: "💬",
-            text: "João perguntou à Tia Dora sobre frações",
-            detail: "Conversou por 15 minutos",
-            time: "Há 3h",
-          },
-          {
-            icon: "🎯",
-            text: "Maria completou todas as missões diárias",
-            detail: "+150 pontos ganhos",
-            time: "Ontem",
-          },
-        ]
-
-        const activityList = document.getElementById("recent-activity")
-        activityList.innerHTML = mockActivities
-          .map(
-            (activity) => `
-        <li style="padding: var(--spacing-md) 0; border-bottom: 1px solid var(--gray-200);">
-          <div style="display: flex; gap: var(--spacing-md); align-items: start;">
-            <div style="font-size: 1.5rem;">${activity.icon}</div>
-            <div style="flex: 1;">
-              <p style="font-weight: 600; margin-bottom: var(--spacing-2xs);">${activity.text}</p>
-              <p style="font-size: var(--text-sm); color: var(--text-secondary);">${activity.detail}</p>
-            </div>
-            <span style="font-size: var(--text-sm); color: var(--text-tertiary);">${activity.time}</span>
-          </div>
-        </li>
-      `
-          )
-          .join("")
-      }
-
-      // Adicionar novo aluno
-      async function addStudent() {
-        const form = document.getElementById("add-student-form")
-
-        if (!window.app.validateForm(form)) {
-          return
+        if (document.getElementById('engagementChart')) {
+          new Chart(document.getElementById('engagementChart'), {
+            type: 'line',
+            data: engagementData,
+            options: {
+              responsive: true,
+              plugins: { legend: { display: false } }
+            }
+          });
         }
+      });
 
-        const nome = document.getElementById("new-aluno-nome").value
-        const nascimento = document.getElementById("new-aluno-nascimento").value
-        const serie = document.getElementById("new-aluno-serie").value
-
-        showLoader(true)
-
-        try {
-          // TODO: Chamar API para adicionar aluno
-          await new Promise((resolve) => setTimeout(resolve, 1000))
-
-          showToast("Aluno adicionado com sucesso! 🎉", "success")
-          closeModal("add-student-modal")
-          form.reset()
-
-          // Recarregar dados
-          loadDashboardData()
-        } catch (error) {
-          showToast("Erro ao adicionar aluno", "error")
-        } finally {
-          showLoader(false)
+      // Feedback dos usuários
+      let feedbacks = [
+        { nome: 'Maria', comentario: 'Minha filha está aprendendo muito!' },
+        { nome: 'João', comentario: 'Gostei dos relatórios, muito úteis.' },
+        { nome: 'Ana', comentario: 'Seria legal ter mais jogos educativos.' }
+      ];
+      const feedbackList = document.getElementById('feedback-list');
+      function renderFeedbacks() {
+        feedbackList.innerHTML = '';
+        feedbacks.forEach(fb => {
+          const div = document.createElement('div');
+          div.className = 'feedback-item';
+          div.innerHTML = `<strong>${fb.nome}:</strong> ${fb.comentario}`;
+          feedbackList.appendChild(div);
+        });
+      }
+      renderFeedbacks();
+      document.getElementById('feedback-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nome = document.getElementById('feedback-nome').value.trim();
+        const comentario = document.getElementById('feedback-comentario').value.trim();
+        if (nome && comentario) {
+          feedbacks.push({ nome, comentario });
+          renderFeedbacks();
+          e.target.reset();
         }
-      }
-
-      // Logout
-      function logout() {
-        storage.remove("user")
-        storage.remove("authToken")
-        window.location.href = "login.html"
-      }
-
-      // Carregar dados ao iniciar
-      loadDashboardData()
+      });
     </script>
   </body>
 </html>

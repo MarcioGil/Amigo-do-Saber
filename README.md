@@ -28,6 +28,23 @@ Assim você pode navegar e mostrar todas as funcionalidades do app mesmo sem dep
 - Correção e validação do arquivo `staticwebapp.config.json`.
 - Checklist de deploy atualizado e CI/CD validado.
 # 🎓 Amigo do Saber
+#
+## 👩🏾‍🏫 Apresentação do Projeto
+
+Este projeto foi idealizado e desenvolvido por **Marcio Gil** para democratizar o reforço escolar na Baixada.
+
+### 🎥 Apresentação em vídeo
+Você pode assistir à apresentação oficial do projeto com a própria Tia Dora em:
+**[YouTube - Apresentação Amigo do Saber](https://www.youtube.com/@marciogil)**
+
+### 📱 Links do autor
+- [LinkedIn](https://www.linkedin.com/in/marciogil)
+- [GitHub](https://github.com/MarcioGil)
+- [Instagram](https://instagram.com/marciogil.dev)
+
+### 👩🏾‍🏫 Avatar da Tia Dora
+O avatar oficial está disponível em `frontend/img/tia-dora-avatar.svg` para uso em vídeos, apresentações e materiais.
+
 
 **Plataforma educacional gratuita para reforço escolar personalizado na Baixada**
 
@@ -56,17 +73,57 @@ Democratizar o acesso à educação de qualidade, oferecendo reforço escolar pe
 
 ## 🔒 Segurança e Privacidade
 
-- Autenticação segura com Azure AD B2C
-- Proteção de dados infantis conforme LGPD e COPPA
-- Conteúdo moderado e apropriado para cada faixa etária
-- Ambiente seguro e supervisionado
+
+### Segurança de Segredos
+
+**Nunca exponha chaves ou senhas no código ou em commits!**
+
+1. Use o arquivo `.env.example` como template e nunca suba `.env` real para o repositório.
+2. Para verificar se há segredos acidentais no histórico, utilize:
+  - **Windows:**
+    - Instale o [truffleHog](https://github.com/trufflesecurity/trufflehog) via Python:
+     ```powershell
+     pip install trufflehog
+     trufflehog filesystem .
+     ```
+  - **Mac/Linux:**
+    - Instale o git-secrets:
+     ```bash
+     brew install git-secrets
+     git secrets --install
+     git secrets --scan
+     ```
+3. Use Azure Key Vault para armazenar segredos em produção.
+  - No GitHub Actions, referencie segredos via `${{ secrets.AZURE_OPENAI_KEY }}`.
+
+### Instruções para quem nunca usou Azure
+
+1. Crie uma conta gratuita em https://portal.azure.com
+2. Instale a [Azure CLI](https://docs.microsoft.com/pt-br/cli/azure/install-azure-cli)
+3. Faça login:
+  ```powershell
+  az login
+  ```
+4. Para criar recursos básicos:
+  ```powershell
+  az group create --name AmigoDoSaberRG --location brazilsouth
+  az storage account create --name amigodosaberstorage --resource-group AmigoDoSaberRG --location brazilsouth --sku Standard_LRS
+  ```
+5. Para usar Key Vault:
+  ```powershell
+  az keyvault create --name amigodosaber-vault --resource-group AmigoDoSaberRG --location brazilsouth
+  az keyvault secret set --vault-name amigodosaber-vault --name AZURE_OPENAI_KEY --value <sua-chave>
+  ```
+6. Consulte a documentação oficial do Azure para mais detalhes.
+
+
+- Nunca commit segredos reais (.env, chaves, tokens).
+- Use `.env.example` como referência para variáveis.
+- Configure Azure Key Vault ou GitHub Secrets para produção.
+- No GitHub Actions, referencie segredos via `${{ secrets.AZURE_OPENAI_KEY }}`.
+- Recomenda-se rodar `git secrets --scan` antes de cada commit.
 
 ## ♿ Acessibilidade
-
-- Interface responsiva (mobile-first)
-- Suporte a leitores de tela
-- Alto contraste e tamanhos de fonte ajustáveis
-- Navegação por teclado
 - Conformidade com WCAG 2.1 (nível AA)
 
 ## 🏗️ Arquitetura (Free Tier - Custo R$ 0)

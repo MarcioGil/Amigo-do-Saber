@@ -32,35 +32,67 @@
     <!-- Header -->
     <header class="header">
       <div class="container">
-        <div class="header-content">
-          <div class="tia-dora-avatar-container">
-            <img src="img/tia-dora-avatar.svg" alt="Avatar da Tia Dora - mulher preta, carinhosa" class="tia-dora-avatar" width="80" height="80" />
-          </div>
-          <h1>
-            Tia Dora
-          </h1>
-          <div class="header-status" id="connection-status">
-            <span class="status-indicator online"></span>
-            <span class="status-text">Online</span>
+        <!-- Botão de Feedback acessível -->
+        <div class="feedback-header">
+          <button
+            id="open-feedback"
+            class="feedback-btn"
+            aria-label="Enviar feedback para a equipe"
+            tabindex="0"
+          >
+            💬 Enviar Feedback
+          </button>
+        </div>
+        <div class="language-selector" aria-label="Selecionar idioma">
+          <label for="select-language" class="sr-only">Idioma</label>
+          <select
+            id="select-language"
+            name="language"
+            aria-describedby="select-language-desc"
+          >
+            <option value="pt" selected>Português</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="ind">Indígena</option>
+          </select>
+          <span id="select-language-desc" class="sr-only"
+            >Selecione o idioma da interface</span
+          >
+        </div>
+        <div class="container colorful-header">
+          <div class="header-flex">
+            <div class="tia-dora-avatar-container mascot-bounce">
+              <img src="img/tia-dora-avatar.svg" alt="Avatar da Tia Dora - mulher preta, carinhosa" class="tia-dora-avatar" width="100" height="100" />
+            </div>
+            <div class="header-main-info">
+              <h1 class="tia-dora-title-gradient">Tia Dora <span class="tia-dora-emoji">🎀</span></h1>
+              <div class="header-status" id="connection-status">
+                <span class="status-indicator online"></span>
+                <span class="status-text">Online</span>
+              </div>
+              <div class="tia-dora-desc">
+                <p>
+                  Olá! Eu sou a Tia Dora, sua professora virtual. Sou uma mulher preta, carinhosa e acolhedora, pronta para ajudar você a aprender e se divertir. Sinta-se em casa!
+                </p>
+              </div>
+            </div>
+            <div class="header-actions">
+              <button id="open-feedback" class="feedback-btn big-btn rainbow-btn" aria-label="Enviar feedback para a equipe" tabindex="0">
+                💬 Enviar Feedback
+              </button>
+              <div class="language-selector" aria-label="Selecionar idioma">
+                <label for="select-language" class="sr-only">Idioma</label>
+                <select id="select-language" name="language" aria-describedby="select-language-desc">
+                  <option value="pt" selected>Português</option>
+                  <option value="en">English</option>
+                  <option value="es">Español</option>
+                  <option value="ind">Indígena</option>
+                </select>
+                <span id="select-language-desc" class="sr-only">Selecione o idioma da interface</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="tia-dora-desc">
-          <p>
-            Olá! Eu sou a Tia Dora, sua professora virtual. Sou uma mulher preta, carinhosa e acolhedora, pronta para ajudar você a aprender e se divertir. Sinta-se em casa!
-          </p>
-        </div>
-      </div>
-    </header>
-
-    <!-- Main -->
-    <main id="chat-container" class="chat-container">
-      <div class="container">
-        <!-- Apresentação da Tia Dora -->
-        <div class="tia-dora-intro">
-          <div class="avatar">🎀</div>
-          <div class="intro-text">
-            <h2>Olá, querido! Eu sou a Tia Dora!</h2>
-            <p>
               Estou aqui para te ajudar com suas lições de casa, tirar suas
               dúvidas e tornar o aprendizado mais divertido! 💜
             </p>
@@ -177,6 +209,85 @@
         <div class="rate-limit-info" id="rate-limit-info">
           <small>💡 Você pode fazer até 50 perguntas por hora</small>
         </div>
+        <!-- Área de Feedbacks Recebidos -->
+        <section
+          id="feedback-list-section"
+          class="feedback-list-section"
+          aria-labelledby="feedback-list-title"
+        >
+          <h2 id="feedback-list-title">Feedbacks dos Usuários</h2>
+          <div
+            id="feedback-list"
+            class="feedback-list"
+            aria-live="polite"
+          ></div>
+        </section>
+        <!-- Área de Conquistas Lúdicas -->
+        <section id="achievements-section" class="achievements-section" aria-labelledby="achievements-title">
+          <h2 id="achievements-title">Minhas Conquistas</h2>
+          <div class="achievement-card">
+            <span class="achievement-icon">🥇</span>
+            <div>
+              <span class="achievement-title">Primeira Pergunta!</span>
+              <div class="achievement-desc">Você fez sua primeira pergunta para a Tia Dora.</div>
+            </div>
+          </div>
+          <div class="achievement-card">
+            <span class="achievement-icon">🏆</span>
+            <div>
+              <span class="achievement-title">Explorador de Jogos</span>
+              <div class="achievement-desc">Você jogou todos os jogos pelo menos uma vez.</div>
+            </div>
+          </div>
+          <div class="achievement-card">
+            <span class="achievement-icon">🎖️</span>
+            <div>
+              <span class="achievement-title">Feedback Enviado</span>
+              <div class="achievement-desc">Obrigado por ajudar a melhorar o Amigo do Saber!</div>
+            </div>
+          </div>
+        </section>
+        <!-- Modal de Feedback -->
+        <div
+          id="feedback-modal"
+          class="feedback-modal"
+          style="display: none"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="feedback-title"
+        >
+          <div class="feedback-modal-content">
+            <h2 id="feedback-title">Enviar Feedback</h2>
+            <form id="feedback-form">
+              <label for="feedback-nome">Nome (opcional)</label>
+              <input
+                type="text"
+                id="feedback-nome"
+                name="nome"
+                maxlength="50"
+              />
+              <label for="feedback-mensagem">Mensagem</label>
+              <textarea
+                id="feedback-mensagem"
+                name="mensagem"
+                rows="3"
+                maxlength="500"
+                required
+              ></textarea>
+              <div class="form-actions">
+                <button type="submit" class="send-btn">Enviar</button>
+                <button type="button" id="close-feedback" class="close-btn">
+                  Cancelar
+                </button>
+              </div>
+              <div
+                id="feedback-status"
+                class="feedback-status"
+                aria-live="polite"
+              ></div>
+            </form>
+          </div>
+        </div>
       </div>
     </main>
 
@@ -193,5 +304,224 @@
     <script src="js/config.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/tia-dora.js"></script>
+    <script>
+      // Internacionalização: Troca de idioma
+      // Função para carregar traduções
+      async function loadTranslations(lang) {
+        try {
+          const res = await fetch(`locales/${lang}.json`)
+          return await res.json()
+        } catch {
+          return {}
+        }
+      }
+
+      // Função para aplicar traduções na interface
+      async function setLanguage(lang) {
+        const t = await loadTranslations(lang)
+        // Header
+        document.querySelector("h1").textContent = t.tiaDoraTitle || "Tia Dora"
+        document.querySelector(".tia-dora-desc p").textContent =
+          t.tiaDoraDesc || ""
+        // Apresentação
+        document.querySelector(".intro-text h2").textContent =
+          t.introTitle || ""
+        document.querySelector(".intro-text p").textContent = t.introText || ""
+        document.querySelector(".intro-tip").innerHTML = `<strong>${
+          t.introTip || ""
+        }</strong>`
+        // Sugestões
+        document.querySelector(".suggestions-title").textContent =
+          t.suggestionsTitle || ""
+        const btns = document.querySelectorAll(".suggestion-btn")
+        if (btns.length === 6) {
+          btns[0].textContent = t.suggestionFractions || btns[0].textContent
+          btns[1].textContent = t.suggestionVerbs || btns[1].textContent
+          btns[2].textContent =
+            t.suggestionPhotosynthesis || btns[2].textContent
+          btns[3].textContent =
+            t.suggestionMultiplication || btns[3].textContent
+          btns[4].textContent = t.suggestionWriting || btns[4].textContent
+          btns[5].textContent = t.suggestionEnglish || btns[5].textContent
+        }
+        // Feedback modal i18n
+        document.getElementById("feedback-title").textContent =
+          t.feedbackTitle || "Enviar Feedback"
+        document.querySelector('label[for="feedback-nome"]').textContent =
+          t.feedbackNameLabel || "Nome (opcional)"
+        document.querySelector('label[for="feedback-mensagem"]').textContent =
+          t.feedbackMessageLabel || "Mensagem"
+        document.querySelector("#feedback-mensagem").placeholder =
+          t.feedbackMessagePlaceholder || "Digite seu feedback..."
+        document.querySelector("#feedback-form .send-btn").textContent =
+          t.feedbackSendBtn || "Enviar"
+        document.getElementById("close-feedback").textContent =
+          t.feedbackCancelBtn || "Cancelar"
+        document.getElementById("open-feedback").textContent =
+          t.feedbackOpenBtn || "💬 Enviar Feedback"
+        document.getElementById("feedback-list-title").textContent =
+          t.feedbackListTitle || "Feedbacks dos Usuários"
+        await loadAndRenderFeedbacks(lang)
+      }
+
+      // Inicializa idioma padrão
+      setLanguage("pt")
+
+      document
+        .getElementById("select-language")
+        .addEventListener("change", function (e) {
+          setLanguage(e.target.value)
+        })
+
+      // Acessibilidade: Voz da Tia Dora
+      let voiceEnabled = false
+      const toggleVoiceBtn = document.getElementById("toggle-voice")
+      toggleVoiceBtn.addEventListener("click", function () {
+        voiceEnabled = !voiceEnabled
+        toggleVoiceBtn.setAttribute("aria-pressed", voiceEnabled)
+        toggleVoiceBtn.textContent = voiceEnabled
+          ? "🔊 Voz ativada"
+          : "🔊 Voz da Tia Dora"
+      })
+
+      // Função para ler mensagem em voz alta
+      function speakMessage(text, lang = "pt-BR") {
+        if (!voiceEnabled || !window.speechSynthesis) return
+        const utter = new window.SpeechSynthesisUtterance(text)
+        utter.lang = lang
+        window.speechSynthesis.cancel()
+        window.speechSynthesis.speak(utter)
+      }
+
+      // Fala automática da apresentação e dicas ao carregar página
+      function speakIntro(lang) {
+        if (!voiceEnabled) return
+        const intro =
+          document.querySelector(".intro-text h2").textContent +
+          " " +
+          document.querySelector(".intro-text p").textContent +
+          " " +
+          document.querySelector(".intro-tip").textContent
+        speakMessage(intro, lang)
+      }
+
+      // Fala automática das respostas da Tia Dora
+      const messagesContainer = document.getElementById("messages-container")
+      const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          mutation.addedNodes.forEach(function (node) {
+            if (node.classList && node.classList.contains("tia-dora-message")) {
+              // Detecta idioma selecionado
+              const lang = document.getElementById("select-language").value
+              let langCode = "pt-BR"
+              if (lang === "en") langCode = "en-US"
+              if (lang === "es") langCode = "es-ES"
+              speakMessage(node.textContent, langCode)
+            }
+          })
+        })
+      })
+      if (messagesContainer) {
+        observer.observe(messagesContainer, { childList: true })
+      }
+
+      // Fala apresentação ao ativar voz
+      toggleVoiceBtn.addEventListener("click", function () {
+        if (voiceEnabled) {
+          const lang = document.getElementById("select-language").value
+          let langCode = "pt-BR"
+          if (lang === "en") langCode = "en-US"
+          if (lang === "es") langCode = "es-ES"
+          speakIntro(langCode)
+        } else {
+          window.speechSynthesis.cancel()
+        }
+      })
+
+      // Feedback modal logic
+      const feedbackModal = document.getElementById("feedback-modal")
+      const openFeedbackBtn = document.getElementById("open-feedback")
+      const closeFeedbackBtn = document.getElementById("close-feedback")
+      const feedbackForm = document.getElementById("feedback-form")
+      const feedbackStatus = document.getElementById("feedback-status")
+
+      // Função para carregar e renderizar feedbacks
+      async function loadAndRenderFeedbacks(lang) {
+        const feedbackList = document.getElementById("feedback-list")
+        feedbackList.innerHTML =
+          '<div class="feedback-loading">Carregando feedbacks...</div>'
+        try {
+          const res = await fetch(`/api/Feedback?idioma=${lang}`)
+          if (!res.ok) throw new Error("Erro ao buscar feedbacks")
+          const feedbacks = await res.json()
+          if (!feedbacks.length) {
+            feedbackList.innerHTML =
+              '<div class="feedback-empty">Nenhum feedback ainda.</div>'
+            return
+          }
+          feedbackList.innerHTML = feedbacks
+            .map(
+              (f) => `
+            <div class="feedback-item">
+              <div class="feedback-meta">
+                <span class="feedback-nome">${f.nome || "Anônimo"}</span>
+                <span class="feedback-data">${new Date(
+                  f.data
+                ).toLocaleDateString()}</span>
+              </div>
+              <div class="feedback-msg">${f.mensagem}</div>
+            </div>
+          `
+            )
+            .join("")
+        } catch {
+          feedbackList.innerHTML =
+            '<div class="feedback-error">Erro ao carregar feedbacks.</div>'
+        }
+      }
+
+      openFeedbackBtn.addEventListener("click", function () {
+        feedbackModal.style.display = "block"
+        document.getElementById("feedback-nome").focus()
+      })
+      closeFeedbackBtn.addEventListener("click", function () {
+        feedbackModal.style.display = "none"
+        feedbackForm.reset()
+        feedbackStatus.textContent = ""
+      })
+
+      feedbackForm.addEventListener("submit", async function (e) {
+        e.preventDefault()
+        feedbackStatus.textContent = ""
+        const nome = document.getElementById("feedback-nome").value
+        const mensagem = document.getElementById("feedback-mensagem").value
+        const idioma = document.getElementById("select-language").value
+        if (!mensagem.trim()) {
+          feedbackStatus.textContent = "Mensagem obrigatória."
+          return
+        }
+        try {
+          const res = await fetch("/api/Feedback", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nome, mensagem, idioma }),
+          })
+          if (res.ok) {
+            feedbackStatus.textContent = "Feedback enviado com sucesso!"
+            feedbackForm.reset()
+            setTimeout(() => {
+              feedbackModal.style.display = "none"
+              feedbackStatus.textContent = ""
+              loadAndRenderFeedbacks(idioma)
+            }, 1500)
+          } else {
+            const err = await res.json()
+            feedbackStatus.textContent = err.error || "Erro ao enviar feedback."
+          }
+        } catch {
+          feedbackStatus.textContent = "Erro de conexão."
+        }
+      })
+    </script>
   </body>
 </html>
