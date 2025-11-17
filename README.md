@@ -1,211 +1,304 @@
-# 🎓 Amigo do Saber
+# 🎓 Amigo do Saber: Reforço Escolar Personalizado na Baixada
 
-Plataforma educacional gratuita para reforço escolar personalizado na Baixada🎓 Amigo do Saber
+Plataforma educacional **gratuita** e **personalizada** para o reforço escolar de crianças e adolescentes, focada em democratizar o acesso à educação de qualidade na Baixada Fluminense.
+
+---
+
+## 🔗 Experimente Agora!
+
+### 🟢 Demo Interativa
+Clique e converse com a Professora Virtual **"Tia Dora"** para ter um gostinho do aplicativo:
+**[Acesse a Demonstração AQUI](https://tiadora-gjmqdkfw.manus.space)**
+
+---
 
 ## 🎯 Missão
 
-Democratizar o acesso à educação de qualidade, oferecendo reforço escolar personalizado, gamificação, jogos educativos e uma professora virtual que acompanha cada criança em sua jornada de aprendizado.
-Democratizar o acesso à educação de qualidade, oferecendo reforço escolar personalizado, gamificação, jogos educativos e uma professora virtual que acompanha cada criança em sua jornada de aprendizado.
-<!-- Badges -->
+Democratizar o acesso à educação de qualidade, oferecendo um ecossistema de aprendizado moderno e envolvente, que inclui:
+
+* **Reforço Escolar Personalizado**
+* **Gamificação** e **Jogos Educativos**
+* **Professora Virtual (IA)**, que acompanha e orienta cada criança em sua jornada.
+
+---
+
+## 🌍 Impacto Social e Foco Comunitário
+
+O Amigo do Saber nasceu da necessidade de combater a desigualdade educacional, especificamente na **Baixada Fluminense (RJ)**.
+
+* **Gratuidade Total:** Eliminação de barreiras financeiras para o reforço escolar de qualidade.
+* **Foco Regional:** Conteúdo e abordagem adaptados ao contexto da educação pública local.
+* **Apoio a Educadores:** Fornece relatórios e ferramentas para auxiliar professores e responsáveis no acompanhamento do aprendizado.
+
+---
+
 ## ✨ Funcionalidades
 
-### 📚 Para os Alunos✨ Funcionalidades
+### 📚 Para os Alunos
+| Funcionalidade | Descrição | Tecnologia Chave |
+| :--- | :--- | :--- |
+| **Professora Virtual (IA)** | Explica conceitos, tira dúvidas e interage de forma amigável e segura. | Azure OpenAI |
+| **Reforço Personalizado** | Conteúdo adaptado à série e às **dificuldades específicas** do aluno. | Cosmos DB (Progresso) |
+| **Gamificação Completa** | Sistema de pontos, **badges**, níveis e **missões diárias** para manter o engajamento. | Azure Functions |
+| **Preparação para Provas** | Simulados e revisões focadas para fixação do conteúdo. | |
+| **Jogos Educativos** | Aprenda brincando com jogos de **Matemática, Português e Inglês**. | HTML/JS |
+| **Aulas de Inglês** | Vocabulário, pronúncia e conversação básica. | Azure Translator |
+| **Bot Conselheiro** | Orientações sobre estudos, comportamento e segurança online. | Azure AI Language |
 
-- Reforço Escolar Personalizado: Conteúdo adaptado à série e dificuldades específicas
-- Professora Virtual (IA): Explica conceitos, tira dúvidas e interage de forma amigávelReforço Escolar Personalizado: Conteúdo adaptado à série e dificuldades específicas
-- Preparação para Provas: Simulados e revisões focadas
-- Sistema de Gamificação: Pontos, badges, níveis e missões diáriasPreparação para Provas: Simulados e revisões focadas
-- Jogos Educativos: Aprenda brincando com jogos de matemática, português e inglêsificação: Pontos, badges, níveis e missões diárias
-- Aulas de Inglês: Vocabulário, pronúncia e conversação básicaJogos Educativos: Aprenda brincando com jogos de matemática, português e inglês
-- Bot Conselheiro: Orientações sobre estudos, comportamento e segurança online
+### 👨‍👩‍👧‍👦 Para os Responsáveis
 
-### 👨‍👩‍👧‍👦 Para os Responsáveissponsáveis
-- Relatórios Personalizados: Evolução por matéria e habilidade
-- Alertas Inteligentes: Notificações sobre dificuldades detectadasAlertas Inteligentes: Notificações sobre dificuldades detectadas
-- Gestão de Perfil: Configure séries, matérias e livros didáticosfigure séries, matérias e livros didáticos
-- Autenticação segura com Azure AD B2Cntis conforme LGPD e COPPA
-- Proteção de dados infantis conforme LGPD e COPPAConteúdo moderado e apropriado para cada faixa etária
-- Conteúdo moderado e apropriado para cada faixa etáriauro e supervisionado
-- Ambiente seguro e supervisionado♿ Acessibilidade
-  obile-first)
+* **Relatórios de Evolução:** Acompanhamento detalhado por matéria e habilidade.
+* **Alertas Inteligentes:** Notificações automáticas sobre dificuldades detectadas no aprendizado.
+* **Gestão de Perfil:** Configuração de séries, matérias e livros didáticos.
+* **Segurança e Privacidade:** Autenticação segura com Azure AD B2C e proteção de dados em conformidade com **LGPD** e **COPPA**.
+* **Moderação de Conteúdo:** Ambiente seguro e supervisionado, com conteúdo moderado e apropriado para cada faixa etária (via Azure Content Safety).
 
-### ♿ AcessibilidadeSuporte a leitores de tela
+### ♿ Acessibilidade e Design
 
-- Interface responsiva (mobile-first)traste e tamanhos de fonte ajustáveis
-- Suporte a leitores de tela
-- Alto contraste e tamanhos de fonte ajustáveismidade com WCAG 2.1 (nível AA)
-- Navegação por teclado
-      ▼
-BACKEND (Azure Functions)## Demonstração
-  • Alunos           |  • Azure OpenAI (Professora)[Repositório no GitHub](https://github.com/MarcioGil/Amigo-do-Saber)
-  • Progresso        |  • AI Language (Bot Conselheiro)
-  • Gamificação      |  • Translator (Inglês)
-  • LogsDeUso        |  • Content Safety (Moderação)Veja o arquivo [ROADMAP.md](ROADMAP.md) para próximos passos e funcionalidades planejadas.
-      ▼
-ANALYTICS (Power BI Desktop)## Licença
+Compromisso total com a inclusão:
 
+* **Interface Responsiva (Mobile-First):** Experiência otimizada em celulares.
+* **Conformidade WCAG 2.1 (Nível AA):** Para garantir o acesso a todos.
+* **Recursos Inclusivos:** Suporte a leitores de tela, alto contraste e tamanhos de fonte ajustáveis.
 
+---
 
+## 🚀 Tecnologias
 
+Um *stack* robusto e *serverless* baseado em **Microsoft Azure**:
 
+| Categoria | Componente | Descrição / Serviço Azure |
+| :--- | :--- | :--- |
+| **Frontend** | HTML5, CSS3, JavaScript (ES6+) | Hospedado em **Azure Static Web Apps** |
+| **Backend (API)** | Azure Functions (Node.js/Python) | *Serverless* e escalável. |
+| **Banco de Dados** | Azure Cosmos DB (Free Tier) | Persistência de dados e progresso do aluno. |
+| **Inteligência Artificial** | Azure OpenAI, Azure AI Language, Azure Translator, Content Safety | Poderes da IA para a Professora Virtual e Moderação. |
+| **Autenticação** | Azure AD B2C | Gestão segura de identidades. |
+| **CI/CD** | GitHub Actions | Automatização de build e deploy. |
+| **Analytics** | Power BI Desktop | Dashboard de Impacto Social e Métricas Educacionais. |
 
+---
 
+## 💻 Desenvolvimento Local
 
+Para rodar o projeto localmente, você precisará de: **VS Code**, **Git**, **Node.js 18+** ou **Python 3.9+**, **Azure Free Account** e as extensões Azure para VS Code.
 
+### Backend (Azure Functions)
 
+A API estará disponível em `http://localhost:7071/api/`.
 
+```bash
+# Entra na pasta do Backend
+cd backend
 
+# Instala as dependências
+npm install
 
+# Inicia as Azure Functions
+func start
 
+Fantástico! Com os seus links, a seção "Sobre o Autor" está completa.
 
+Aqui está o código Markdown completo e final do seu README.md. Ele já está 100% formatado, com todos os seus links corretos e com o link de demonstração em destaque.
 
+Basta copiar o bloco de código inteiro abaixo e colar no seu arquivo README.md.
 
+Markdown
 
+# 🎓 Amigo do Saber: Reforço Escolar Personalizado na Baixada
 
+Plataforma educacional **gratuita** e **personalizada** para o reforço escolar de crianças e adolescentes, focada em democratizar o acesso à educação de qualidade na Baixada Fluminense.
 
+---
 
+## 🔗 Experimente Agora!
 
+### 🟢 Demo Interativa
+Clique e converse com a Professora Virtual **"Tia Dora"** para ter um gostinho do aplicativo:
+**[Acesse a Demonstração AQUI](https://tiadora-gjmqdkfw.manus.space)**
 
+---
 
+## 🎯 Missão
 
+Democratizar o acesso à educação de qualidade, oferecendo um ecossistema de aprendizado moderno e envolvente, que inclui:
 
+* **Reforço Escolar Personalizado**
+* **Gamificação** e **Jogos Educativos**
+* **Professora Virtual (IA)**, que acompanha e orienta cada criança em sua jornada.
 
+---
 
+## 🌍 Impacto Social e Foco Comunitário
 
+O Amigo do Saber nasceu da necessidade de combater a desigualdade educacional, especificamente na **Baixada Fluminense (RJ)**.
 
+* **Gratuidade Total:** Eliminação de barreiras financeiras para o reforço escolar de qualidade.
+* **Foco Regional:** Conteúdo e abordagem adaptados ao contexto da educação pública local.
+* **Apoio a Educadores:** Fornece relatórios e ferramentas para auxiliar professores e responsáveis no acompanhamento do aprendizado.
 
+---
 
+## ✨ Funcionalidades
 
+### 📚 Para os Alunos
+| Funcionalidade | Descrição | Tecnologia Chave |
+| :--- | :--- | :--- |
+| **Professora Virtual (IA)** | Explica conceitos, tira dúvidas e interage de forma amigável e segura. | Azure OpenAI |
+| **Reforço Personalizado** | Conteúdo adaptado à série e às **dificuldades específicas** do aluno. | Cosmos DB (Progresso) |
+| **Gamificação Completa** | Sistema de pontos, **badges**, níveis e **missões diárias** para manter o engajamento. | Azure Functions |
+| **Preparação para Provas** | Simulados e revisões focadas para fixação do conteúdo. | |
+| **Jogos Educativos** | Aprenda brincando com jogos de **Matemática, Português e Inglês**. | HTML/JS |
+| **Aulas de Inglês** | Vocabulário, pronúncia e conversação básica. | Azure Translator |
+| **Bot Conselheiro** | Orientações sobre estudos, comportamento e segurança online. | Azure AI Language |
 
+### 👨‍👩‍👧‍👦 Para os Responsáveis
 
+* **Relatórios de Evolução:** Acompanhamento detalhado por matéria e habilidade.
+* **Alertas Inteligentes:** Notificações automáticas sobre dificuldades detectadas no aprendizado.
+* **Gestão de Perfil:** Configuração de séries, matérias e livros didáticos.
+* **Segurança e Privacidade:** Autenticação segura com Azure AD B2C e proteção de dados em conformidade com **LGPD** e **COPPA**.
+* **Moderação de Conteúdo:** Ambiente seguro e supervisionado, com conteúdo moderado e apropriado para cada faixa etária (via Azure Content Safety).
 
+### ♿ Acessibilidade e Design
 
+Compromisso total com a inclusão:
 
+* **Interface Responsiva (Mobile-First):** Experiência otimizada em celulares.
+* **Conformidade WCAG 2.1 (Nível AA):** Para garantir o acesso a todos.
+* **Recursos Inclusivos:** Suporte a leitores de tela, alto contraste e tamanhos de fonte ajustáveis.
 
+---
 
+## 🚀 Tecnologias
 
+Um *stack* robusto e *serverless* baseado em **Microsoft Azure**:
 
+| Categoria | Componente | Descrição / Serviço Azure |
+| :--- | :--- | :--- |
+| **Frontend** | HTML5, CSS3, JavaScript (ES6+) | Hospedado em **Azure Static Web Apps** |
+| **Backend (API)** | Azure Functions (Node.js/Python) | *Serverless* e escalável. |
+| **Banco de Dados** | Azure Cosmos DB (Free Tier) | Persistência de dados e progresso do aluno. |
+| **Inteligência Artificial** | Azure OpenAI, Azure AI Language, Azure Translator, Content Safety | Poderes da IA para a Professora Virtual e Moderação. |
+| **Autenticação** | Azure AD B2C | Gestão segura de identidades. |
+| **CI/CD** | GitHub Actions | Automatização de build e deploy. |
+| **Analytics** | Power BI Desktop | Dashboard de Impacto Social e Métricas Educacionais. |
 
+---
 
+## 💻 Desenvolvimento Local
 
+Para rodar o projeto localmente, você precisará de: **VS Code**, **Git**, **Node.js 18+** ou **Python 3.9+**, **Azure Free Account** e as extensões Azure para VS Code.
 
+### Backend (Azure Functions)
 
+A API estará disponível em `http://localhost:7071/api/`.
 
+```bash
+# Entra na pasta do Backend
+cd backend
 
+# Instala as dependências
+npm install
 
+# Inicia as Azure Functions
+func start
+Frontend
+O Frontend estará disponível em http://localhost:8080.
 
+Bash
 
+# Entra na pasta do Frontend
+cd frontend
 
+# Inicia o servidor HTTP
+npx http-server -p 8080
+💬 Testar a Professora Virtual (Exemplo)
+PowerShell
 
+$body = @{
+    alunoId = "teste123"
+    pergunta = "O que é fotossíntese?"
+}
+Invoke-RestMethod `
+  -Uri "http://localhost:7071/api/tia-dora" `
+  -Method POST `
+  -Body $body `
+  -ContentType "application/json" | ConvertTo-Json
+🎬 Começando Rápido (Deploy para o Azure)
+O deploy completo é automatizado via scripts e GitHub Actions.
 
+Opção 1: Setup Automatizado (Recomendado)
+Bash
 
+# Clona o repositório
+git clone [https://github.com/MarcioGil/Amigo-do-Saber.git](https://github.com/MarcioGil/Amigo-do-Saber.git)
+cd Amigo-do-Saber
 
+# 1. Execute o script de setup (cria todos os recursos necessários no Azure)
+./scripts/setup-azure.ps1
 
+# 2. Faça o deploy (Configure secrets no GitHub antes de fazer push)
+./scripts/deploy.ps1
 
+# 3. Commit e Push
+git add .
+git commit -m "Initial deployment"
+git push origin main
+✅ Pronto! Sua aplicação estará no ar em aproximadamente 15 minutos.
 
+🤝 Contribuindo
+Contribuições são bem-vindas! Este é um projeto de impacto social e contamos com a comunidade para expandi-lo.
 
+Fork o projeto.
 
+Crie uma Branch de nova funcionalidade: git checkout -b feature/NovaFuncionalidade
 
+Commit suas mudanças: git commit -m 'Adiciona nova funcionalidade'
 
+Push para a branch: git push origin feature/NovaFuncionalidade
 
+Abra um Pull Request.
 
+Consulte o arquivo CONTRIBUTING.md para regras detalhadas e o ROADMAP.md para próximos passos do projeto.
 
+🗺 Roadmap
+Veja o arquivo ROADMAP.md para funcionalidades planejadas, melhorias e próximos passos.
 
+🌐 Internacionalização
+O projeto suporta múltiplos idiomas. Os arquivos de tradução estão em frontend/locales/:
 
+pt.json (Português)
 
+en.json (Inglês)
 
+es.json (Espanhol)
 
+ind.json (Indígena)
 
+📄 Licença
+Este projeto é open-source sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
 
+🙏 Agradecimentos
+Feito com ❤ para a educação pública de qualidade.
 
+À Microsoft Azure pelos serviços gratuitos que tornam isso possível.
 
+Aos professores e educadores que compartilharam suas experiências.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Feito com ❤ para a educação pública de qualidadeÀ Microsoft Azure pelos serviços gratuitos que tornam isso possívelAos professores e educadores que compartilharam suas experiênciasÀ comunidade da Baixada que inspirou este projeto## 🙏 Agradecimentos> "Acredito que a tecnologia pode ser uma ferramenta poderosa para democratizar o acesso à educação de qualidade, especialmente para comunidades que mais precisam."- 📁 [Repositório do Projeto](https://github.com/MarcioGil/Amigo-do-Saber)- 🌐 [Portfólio](https://marciogil.github.io)- 💻 [GitHub](https://github.com/MarcioGil)- 💼 [LinkedIn](https://www.linkedin.com/in/marciogil)Conecte-se:Embaixador da Turma 14 do DIO Campus Expert, Estudante de Engenharia de Software, apaixonado por Educação, Inovação, tecnologia e em constante luta por Justiça Social.Márcio Gil## 👤 Sobre o AutorVeja o arquivo [ROADMAP.md](ROADMAP.md) para funcionalidades planejadas, melhorias e próximos passos.## 🗺 RoadmapConsulte o arquivo [CONTRIBUTING.md](CONTRIBUTING.md) para regras detalhadas e o [ROADMAP.md](ROADMAP.md) para próximos passos do projeto.5. Abra um Pull Request4. Push para a branch (`git push origin feature/NovaFuncionalidade`)3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)2. Crie uma branch (`git checkout -b feature/NovaFuncionalidade`)1. Fork o projetoContribuições são bem-vindas! Este é um projeto de impacto social.## 🤝 ContribuindoEste projeto é open-source sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.## 📄 Licença- [Repositório no GitHub](https://github.com/MarcioGil/Amigo-do-Saber)- [Demo Landing Page](https://marciogil.github.io/Amigo-do-Saber/tia-dora-landing.html)## 🔗 Links Importantes- ind.json (Indígena)- es.json (Espanhol)- en.json (Inglês)- pt.json (Português)O projeto suporta múltiplos idiomas. Os arquivos de tradução estão em `frontend/locales/`:## 🌐 Internacionalização```    └── azure-deploy.yml      # GitHub Actions└── .github/workflows/         # CI/CD│   └── deploy.ps1            # Deploy rápido│   ├── setup-azure.ps1       # Setup completo do Azure├── scripts/                   # Scripts de automação│   └── ACESSIBILIDADE.md     # WCAG 2.1 AA│   ├── PROFESSORA_VIRTUAL.md # Tia Dora (IA)│   ├── ESTRUTURA_DADOS.md    # Schema do Cosmos DB│   ├── DEPLOY_CONFIG.md      # Configuração de CI/CD│   ├── DEPLOY_AZURE.md       # Guia completo de deploy├── docs/                      # Documentação│   └── *.html                 # Páginas principais│   ├── games/                 # Jogos educativos│   ├── js/                    # JavaScript (1600+ linhas)│   ├── css/                   # Estilos (2400+ linhas)├── frontend/                   # Interface do usuário│   └── shared/                # Utilitários compartilhados│   ├── PerguntarProfessora/   # Tia Dora (IA)│   ├── Gamificacao/           # Sistema de pontos e badges│   ├── AtualizarProgresso/    # Tracking de progresso│   ├── CadastroResponsavel/   # Cadastro de usuários├── backend/                    # Azure Functions (API)Amigo-do-Saber/```## 📦 Estrutura do Projeto```  -ContentType "application/json"  -Body $body `  -Method POST `  -Uri "http://localhost:7071/api/tia-dora" `Invoke-RestMethod `} | ConvertTo-Json  pergunta = "O que é fotossíntese?"  alunoId = "teste123"$body = @{```powershell### Testar Tia DoraFrontend estará em: http://localhost:8080```npx http-server -p 8080cd frontend```sh### FrontendAPI estará em: http://localhost:7071/api```func startnpm installcd backend```sh### Backend (Azure Functions)## 💻 Desenvolvimento LocalSiga o guia detalhado: docs/DEPLOY_AZURE.md### Opção 2: Setup Manual✅ Pronto! Sua aplicação está no ar em ~15 minutos.```git push origin maingit commit -m "Initial deployment"git add .# Configure secrets no GitHub e faça push./scripts/deploy.ps1# Faça o deploy./scripts/setup-azure.ps1# Execute o script de setup (cria todos os recursos no Azure)cd Amigo-do-Sabergit clone https://github.com/MarcioGil/Amigo-do-Saber.git```sh### Opção 1: Setup Automatizado (Recomendado)## 🎬 Começando Rápido  - GitHub Actions  - Azure Static Web Apps  - Azure Databases  - Azure Functions  - Azure Tools (ms-vscode.vscode-node-azure-pack)- Extensões VS Code (Instalar)- Git- Azure Free Account- Node.js 18+ ou Python 3.9+- VS Code## 📋 Pré-requisitosAnalytics: Power BI DesktopCI/CD: GitHub ActionsHospedagem: Azure Static Web AppsAutenticação: Azure AD B2CIA: Azure OpenAI + Azure AI Language + TranslatorBanco de Dados: Azure Cosmos DB (Free Tier)Backend: Azure Functions (Node.js/Python)Frontend: HTML5, CSS3, JavaScript (ES6+)## 🚀 Tecnologias```  Dashboard de Impacto Social + Métricas EducacionaisEste projeto é open-source sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
-
-## Regras para Colaboradores
-Veja o arquivo [CONTRIBUTING.md](CONTRIBUTING.md) para instruções de contribuição.
-
-## Sobre o Autor
-Márcio Gil
-Embaixador da Turma 14 do DIO Campus Expert, Estudante de Engenharia de Software, apaixonado por Educação, Inovação, tecnologia e em constante luta por Justiça Social.
-
-Conecte-se:
-- 💼 [LinkedIn](https://www.linkedin.com/in/marciogil)
-- 💻 [GitHub](https://github.com/MarcioGil)
-- 🌐 [Portfólio](https://marciogil.github.io)
-- 📁 [Repositório do Projeto](https://github.com/MarcioGil/Amigo-do-Saber)
+À comunidade da Baixada que inspirou este projeto.
 
 "Acredito que a tecnologia pode ser uma ferramenta poderosa para democratizar o acesso à educação de qualidade, especialmente para comunidades que mais precisam."
 
-🙏 Agradecimentos
-À comunidade da Baixada que inspirou este projeto
-Aos professores e educadores que compartilharam suas experiências
-À Microsoft Azure pelos serviços gratuitos que tornam isso possível
+👤 Sobre o Autor
+Márcio Gil Embaixador da Turma 14 do DIO Campus Expert, Estudante de Engenharia de Software, apaixonado por Educação, Inovação, tecnologia e em constante luta por Justiça Social.
 
-Feito com ❤ para a educação pública de qualidade
-````
+Conecte-se:
+
+💼 LinkedIn: linkedin.com/in/márcio-gil-1b7669309
+
+💻 GitHub (Perfil): github.com/MarcioGil/MarcioGil.git
+
+🌐 Portfólio/CV: marciogil.github.io/curriculum-vitae/
+
+📁 Repositório do Projeto: github.com/MarcioGil/Amigo-do-Saber
