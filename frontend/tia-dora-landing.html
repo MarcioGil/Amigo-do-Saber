@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bem-vindo, Responsável! | Tia Dora</title>
+  <link rel="stylesheet" href="css/landing.css">
+  <style>
+    body {
+  background: linear-gradient(135deg, #f8e8ff 0%, #e0f7fa 100%);
+  font-family: 'Quicksand', 'Comic Sans MS', Arial, sans-serif;
+  margin: 0;
+      padding: 0;
+    }
+    .container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 16px;
+    }
+    .welcome {
+      background: #fffbe7;
+  border-radius: 24px;
+  box-shadow: 0 2px 16px rgba(90,61,140,0.08);
+  padding: 32px;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    .welcome h2 {
+      font-size: 2rem;
+      color: #5a3d8c;
+      margin-bottom: 8px;
+    }
+    .welcome p {
+  font-size: 1.2rem;
+  color: #4a4a4a;
+  margin-bottom: 16px;
+    }
+    .feedbacks {
+      background: #f3eaff;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 24px;
+    }
+    .feedbacks strong {
+      color: #5a3d8c;
+    }
+    .cards {
+      display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+    }
+    .card {
+      background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(90,61,140,0.07);
+  flex: 1 1 220px;
+  min-width: 220px;
+  padding: 24px;
+  text-align: center;
+      font-size: 1.1rem;
+      color: #5a3d8c;
+    }
+    .card .icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+    .alunos {
+      background: #e0f7fa;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 24px;
+    }
+    .alunos-title {
+      font-weight: bold;
+      color: #00796b;
+      margin-bottom: 8px;
+    }
+    .add-aluno-btn {
+      background: #5a3d8c;
+      color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 8px;
+    }
+    .recent-activity {
+      background: #fffbe7;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 24px;
+    }
+    .loading {
+      color: #5a3d8c;
+      font-style: italic;
+    }
+    .engajamento {
+  background: #f3eaff;
+  border-radius: 16px;
+  padding: 16px;
+      margin-bottom: 24px;
+    }
+    .grafico {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+      margin-bottom: 8px;
+    }
+    .feedback-form {
+  background: #e0f7fa;
+  border-radius: 16px;
+  padding: 16px;
+  text-align: left;
+  max-width: 400px;
+  margin: 0 auto 32px auto;
+    }
+    .feedback-form label {
+      display: block;
+  margin-bottom: 4px;
+  color: #5a3d8c;
+  font-weight: bold;
+    }
+    .feedback-form input, .feedback-form textarea {
+      width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+      border: 1px solid #bdbdbd;
+      font-size: 1rem;
+    }
+    .feedback-form button {
+      background: #5a3d8c;
+      color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    @media (max-width: 700px) {
+      .cards { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="welcome">
+      <h2>Bem-vindo, Responsável! 👋</h2>
+      <p>Acompanhe o progresso dos seus alunos e envie seu feedback para ajudar a melhorar nossa plataforma!</p>
+    </div>
+    <!-- Avatar e fala -->
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:24px;">
+      <img src="img/tia-dora-avatar-novo.jpg" alt="Tia Dora" class="tia-dora-avatar" style="width:140px;height:140px;object-fit:cover;border-radius:50%;border:3px solid #f7b731;box-shadow:0 4px 16px rgba(0,0,0,0.15);margin-bottom:8px;transition:transform 0.2s;" />
+      <div id="speech-text" style="position:relative;background:linear-gradient(90deg,#fffbe7 80%,#ffe5ec 100%);border-radius:24px;padding:20px 24px;font-size:1.15rem;color:#5a3d8c;max-width:400px;box-shadow:0 2px 16px rgba(90,61,140,0.10);margin-bottom:8px;animation:fadeIn 1.2s;border:2px solid #f7b731;" role="status" aria-live="polite">
+        Olá! Eu sou a Tia Dora, sua amiga virtual do Amigo do Saber. Estou aqui para te ajudar a aprender de forma divertida, responder suas dúvidas e te acompanhar em cada desafio. Vamos juntos nessa aventura do conhecimento?
+        <span style="position:absolute;bottom:-24px;left:48px;width:0;height:0;border:24px solid transparent;border-top-color:#fffbe7;border-bottom:0;margin-left:-12px;"></span>
+      </div>
+      <audio id="doraAudio" src="audio/tia-dora-apresentacao.mp3" preload="auto"></audio>
+      <button id="play-audio" class="audio-btn" aria-label="Ouvir apresentação da Tia Dora" style="background:#5a3d8c;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:1rem;cursor:pointer;box-shadow:0 2px 8px rgba(90,61,140,0.07);">
+        <span>Ouvir apresentação da Tia Dora</span>
+        <img src="assets/icons/sound.svg" alt="Ícone de áudio" class="icon-audio" style="width:22px;margin-left:8px;vertical-align:middle;" />
+      </button>
+      <style>@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+      .tia-dora-avatar:hover { transform: scale(1.05); box-shadow:0 8px 24px rgba(0,0,0,0.18); }
+      </style>
+    </div>
+    <div class="feedbacks">
+      <strong>Feedback dos Usuários</strong>
+      <ul>
+  <li>Maria: Minha filha está aprendendo muito!</li>
+  <li>João: Gostei dos relatórios, muito úteis.</li>
+  <li>Ana: Seria legal ter mais jogos educativos.</li>
+      </ul>
+    </div>
+    <form class="feedback-form">
+  <label for="nome">Seu nome:</label>
+  <input type="text" id="nome" name="nome" placeholder="Digite seu nome" />
+  <label for="comentario">Comentário:</label>
+      <textarea id="comentario" name="comentario" rows="2" placeholder="Deixe seu comentário"></textarea>
+      <button type="submit">Enviar feedback</button>
+    </form>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">📊</div>
+        <div>Exercícios esta semana</div>
+        <div><strong>--</strong></div>
+      </div>
+      <div class="card">
+        <div class="icon">⏱️</div>
+        <div>Tempo de estudo</div>
+        <div><strong>--</strong></div>
+      </div>
+      <div class="card">
+  <div class="icon">🏆</div>
+  <div>Badges conquistadas</div>
+  <div><strong>--</strong></div>
+      </div>
+    </div>
+    <div class="alunos">
+  <div class="alunos-title">Meus Alunos</div>
+  <button class="add-aluno-btn">+ Adicionar Aluno</button>
+  <ul>
+  <li>Maria</li>
+  <li>João</li>
+  <li>Ana</li>
+      </ul>
+    </div>
+    <div class="recent-activity">
+      <div class="alunos-title">Atividade Recente</div>
+      <div class="loading">📚 Carregando atividades...<br>Aguarde...</div>
+    </div>
+    <div class="engajamento">
+      <strong>Engajamento Semanal</strong>
+      <div class="grafico">
+        <canvas id="graficoEngajamento" width="500" height="180"></canvas>
+      </div>
+      <div>Seg &nbsp; Ter &nbsp; Qua &nbsp; Qui &nbsp; Sex &nbsp; Sáb &nbsp; Dom</div>
+      <small>Tempo de estudo (minutos por dia)</small>
+    </div>
+  </div>
+  <script>
+    // Gráfico de engajamento semanal (mock)
+    const ctx = document.getElementById('graficoEngajamento').getContext('2d');
+    // Botão acessível para áudio
+    document.getElementById('play-audio').addEventListener('click', function() {
+      const audio = document.getElementById('doraAudio');
+      audio.currentTime = 0;
+      audio.play();
+    });
+    document.getElementById('play-audio').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        document.getElementById('play-audio').click();
+      }
+    });
+    function drawChart(ctx) {
+      const dias = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+      const valores = [30, 45, 20, 50, 60, 35, 40];
+  const max = Math.max(...valores);
+  ctx.clearRect(0,0,500,180);
+  // Eixos
+  ctx.strokeStyle = "#bdbdbd";
+  ctx.beginPath();
+  ctx.moveTo(40,20); ctx.lineTo(40,160); ctx.lineTo(480,160); ctx.stroke();
+      // Barras
+      for(let i=0;i<7;i++){
+        const x = 60 + i*60;
+  const h = (valores[i]/max)*120;
+  ctx.fillStyle = "#5a3d8c";
+  ctx.fillRect(x,160-h,36,h);
+  ctx.fillStyle = "#4a4a4a";
+  ctx.font = "14px Quicksand";
+  ctx.fillText(valores[i],x+8,160-h-8);
+  }
+  // Dias
+  ctx.font = "13px Quicksand";
+      ctx.fillStyle = "#00796b";
+      for(let i=0;i<7;i++){
+        const x = 60 + i*60;
+        ctx.fillText(dias[i],x+6,175);
+      }
+    }
+  drawChart(ctx);
+  // Feedback form (mock)
+  document.querySelector('.feedback-form').addEventListener('submit',function(e){
+  e.preventDefault();
+  alert('Obrigado pelo seu feedback!');
+  this.reset();
+    });
+  </script>
+</body>
+</html>
