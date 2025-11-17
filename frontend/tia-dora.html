@@ -1,6 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
+    <meta name="description" content="Converse com a Tia Dora - sua professora virtual carinhosa" />
+    <title>Tia Dora 🎀 | Amigo do Saber</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/tia-dora.css" />
+  </head>
+  <body>
+    <a href="#chat-container" class="skip-link">Pular para o chat</a>
+    <nav class="main-menu" aria-label="Menu principal">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="tia-dora.html" aria-current="page">Tia Dora</a></li>
+        <li><a href="games/index.html">Jogos</a></li>
+        <li><a href="student-area.html">Área do Aluno</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+    <header class="header">
+      <div class="container">
+        <div class="tia-dora-avatar-container mascot-bounce">
+          <img src="img/tia-dora-avatar.svg" alt="Avatar da Tia Dora - mulher preta, carinhosa" class="tia-dora-avatar" width="100" height="100" />
+        </div>
+        <div class="header-main-info">
+          <h1 class="tia-dora-title-gradient">Tia Dora <span class="tia-dora-emoji">🎀</span></h1>
+          <div class="header-status" id="connection-status">
+            <span class="status-indicator online"></span>
+            <span class="status-text">Online</span>
+          </div>
+          <div class="tia-dora-desc">
+            <p>
+              Olá! Eu sou a Tia Dora, sua professora virtual. Sou uma mulher preta, carinhosa e acolhedora, pronta para ajudar você a aprender e se divertir. Sinta-se em casa!
+            </p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button id="open-feedback" class="feedback-btn big-btn rainbow-btn" aria-label="Enviar feedback para a equipe" tabindex="0">
+            💬 Enviar Feedback
+          </button>
+        </div>
+      </div>
+    </header>
+    <div class="speech-bubble">
+      <span id="typewriter" class="typewriter"></span>
+    </div>
+    <script>
+      const texto = `Olá! Eu sou a Tia Dora, sua amiga virtual do Amigo do Saber. Estou aqui para te ajudar a aprender de forma divertida, responder suas dúvidas e te acompanhar em cada desafio. Vamos juntos nessa aventura do conhecimento?`;
+      const el = document.getElementById('typewriter');
+      let i = 0;
+      function typeWriter() {
+        if (i < texto.length) {
+          el.textContent += texto.charAt(i);
+          i++;
+          setTimeout(typeWriter, 38);
+        } else {
+          el.classList.remove('typewriter'); // Remove cursor após terminar
+        }
+      }
+      typeWriter();
+    </script>
+  </body>
+  </html>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta

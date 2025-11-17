@@ -48,6 +48,40 @@
     <!-- Skip Link para Acessibilidade -->
     <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
 
+    <!-- Tia Dora Apresentação -->
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:24px;margin-bottom:8px;">
+      <img src="img/tia-dora-avatar.svg" alt="Tia Dora" style="width:160px;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.12));margin-bottom:12px;" />
+      <div style="position:relative;background:#fffbe7;border-radius:24px;padding:24px 20px 24px 24px;font-size:1.15rem;color:#5a3d8c;max-width:420px;box-shadow:0 2px 16px rgba(90,61,140,0.08);margin-bottom:8px;animation:fadeIn 1.2s;">
+        <span id="typewriter" style="display:inline-block;border-right:2px solid #5a3d8c;white-space:nowrap;overflow:hidden;animation:blink-caret 0.8s step-end infinite;"></span>
+        <button class="btn-audio" style="margin-top:16px;" onclick="speakDora()">Ouvir a Tia Dora</button>
+        <span id="speech-text" style="display:none;">Olá! Eu sou a Tia Dora, sua amiga virtual do Amigo do Saber. Estou aqui para te ajudar a aprender de forma divertida, responder suas dúvidas e te acompanhar em cada desafio. Vamos juntos nessa aventura do conhecimento?</span>
+        <style>
+          @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+          @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #5a3d8c; } }
+        </style>
+        <span style="position:absolute;bottom:-24px;left:48px;width:0;height:0;border:24px solid transparent;border-top-color:#fffbe7;border-bottom:0;margin-left:-12px;"></span>
+      </div>
+    </div>
+    <script>
+      const texto = `Olá! Eu sou a Tia Dora, sua amiga virtual do Amigo do Saber. Estou aqui para te ajudar a aprender de forma divertida, responder suas dúvidas e te acompanhar em cada desafio. Vamos juntos nessa aventura do conhecimento?`;
+      const el = document.getElementById('typewriter');
+      let i = 0;
+      function typeWriter() {
+        if (i < texto.length) {
+          el.textContent += texto.charAt(i);
+          i++;
+          setTimeout(typeWriter, 38);
+        } else {
+          el.style.borderRight = 'none';
+        }
+      }
+      typeWriter();
+      // Carrega landing.js para voz
+      var script = document.createElement('script');
+      script.src = '/js/landing.js';
+      document.body.appendChild(script);
+    </script>
+
     <!-- Header -->
     <header role="banner">
       <nav role="navigation" aria-label="Menu principal" class="navbar">

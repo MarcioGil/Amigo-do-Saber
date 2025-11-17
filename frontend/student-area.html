@@ -107,6 +107,27 @@
     <!-- Skip Link -->
     <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
 
+    <!-- Tia Dora Apresentação -->
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:24px;margin-bottom:8px;">
+      <img src="img/tia-dora-avatar-novo.jpg" alt="Tia Dora" class="tia-dora-avatar" style="width:140px;height:140px;object-fit:cover;border-radius:50%;border:3px solid #f7b731;box-shadow:0 4px 16px rgba(0,0,0,0.15);margin-bottom:8px;transition:transform 0.2s;" />
+      <div id="speech-text" style="position:relative;background:linear-gradient(90deg,#fffbe7 80%,#ffe5ec 100%);border-radius:24px;padding:20px 24px;font-size:1.15rem;color:#5a3d8c;max-width:400px;box-shadow:0 2px 16px rgba(90,61,140,0.10);margin-bottom:8px;animation:fadeIn 1.2s;border:2px solid #f7b731;" role="status" aria-live="polite">
+        Olá! Eu sou a Tia Dora, sua amiga virtual do Amigo do Saber. Estou aqui para te ajudar a aprender de forma divertida, responder suas dúvidas e te acompanhar em cada desafio. Vamos juntos nessa aventura do conhecimento?
+        <span style="position:absolute;bottom:-24px;left:48px;width:0;height:0;border:24px solid transparent;border-top-color:#fffbe7;border-bottom:0;margin-left:-12px;"></span>
+      </div>
+      <audio id="doraAudio" src="audio/tia-dora-apresentacao.mp3" preload="auto"></audio>
+      <button id="play-audio" class="audio-btn" aria-label="Ouvir apresentação da Tia Dora" style="background:#5a3d8c;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:1rem;cursor:pointer;box-shadow:0 2px 8px rgba(90,61,140,0.07);">
+        <span>Ouvir apresentação da Tia Dora</span>
+        <img src="assets/icons/sound.svg" alt="Ícone de áudio" class="icon-audio" style="width:22px;margin-left:8px;vertical-align:middle;" />
+      </button>
+      <style>@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+      .tia-dora-avatar:hover { transform: scale(1.05); box-shadow:0 8px 24px rgba(0,0,0,0.18); }
+      </style>
+    </div>
+      <style>@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+      .tia-dora-avatar:hover { transform: scale(1.05); box-shadow:0 8px 24px rgba(0,0,0,0.18); }
+      </style>
+    </div>
+
     <!-- Header -->
     <header class="header">
       <div class="container">
@@ -656,6 +677,44 @@
     <script src="js/main.js"></script>
     <script src="js/accessibility.js"></script>
     <script>
+                  // Botão acessível para áudio
+                  if (document.getElementById('play-audio')) {
+                    document.getElementById('play-audio').addEventListener('click', function() {
+                      const audio = document.getElementById('doraAudio');
+                      audio.currentTime = 0;
+                      audio.play();
+                    });
+                    document.getElementById('play-audio').addEventListener('keydown', function(e) {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        document.getElementById('play-audio').click();
+                      }
+                    });
+                  }
+              // Botão acessível para áudio
+              document.getElementById('play-audio').addEventListener('click', function() {
+                const audio = document.getElementById('doraAudio');
+                audio.currentTime = 0;
+                audio.play();
+              });
+              document.getElementById('play-audio').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  document.getElementById('play-audio').click();
+                }
+              });
+          // Botão acessível para áudio
+          document.getElementById('play-audio').addEventListener('click', function() {
+            const audio = document.getElementById('doraAudio');
+            audio.currentTime = 0;
+            audio.play();
+          });
+          document.getElementById('play-audio').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              document.getElementById('play-audio').click();
+            }
+          });
       // Verificar autenticação
       const user = storage.get("user")
       if (!user) {
