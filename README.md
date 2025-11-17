@@ -6,7 +6,7 @@ Plataforma educacional gratuita para reforço escolar personalizado na Baixada�
 
 Democratizar o acesso à educação de qualidade, oferecendo reforço escolar personalizado, gamificação, jogos educativos e uma professora virtual que acompanha cada criança em sua jornada de aprendizado.
 Democratizar o acesso à educação de qualidade, oferecendo reforço escolar personalizado, gamificação, jogos educativos e uma professora virtual que acompanha cada criança em sua jornada de aprendizado.
-
+<!-- Badges -->
 ## ✨ Funcionalidades
 
 ### 📚 Para os Alunos✨ Funcionalidades
@@ -18,18 +18,11 @@ Democratizar o acesso à educação de qualidade, oferecendo reforço escolar pe
 - Jogos Educativos: Aprenda brincando com jogos de matemática, português e inglêsificação: Pontos, badges, níveis e missões diárias
 - Aulas de Inglês: Vocabulário, pronúncia e conversação básicaJogos Educativos: Aprenda brincando com jogos de matemática, português e inglês
 - Bot Conselheiro: Orientações sobre estudos, comportamento e segurança online
-  Bot Conselheiro: Orientações sobre estudos, comportamento e segurança online
 
 ### 👨‍👩‍👧‍👦 Para os Responsáveissponsáveis
-
-- Dashboard de Progresso: Acompanhe o desempenho do seu filho em tempo realDashboard de Progresso: Acompanhe o desempenho do seu filho em tempo real
 - Relatórios Personalizados: Evolução por matéria e habilidade
 - Alertas Inteligentes: Notificações sobre dificuldades detectadasAlertas Inteligentes: Notificações sobre dificuldades detectadas
 - Gestão de Perfil: Configure séries, matérias e livros didáticosfigure séries, matérias e livros didáticos
-  vacidade
-
-### 🔒 Segurança e Privacidadecom Azure AD B2C
-
 - Autenticação segura com Azure AD B2Cntis conforme LGPD e COPPA
 - Proteção de dados infantis conforme LGPD e COPPAConteúdo moderado e apropriado para cada faixa etária
 - Conteúdo moderado e apropriado para cada faixa etáriauro e supervisionado
@@ -42,35 +35,14 @@ Democratizar o acesso à educação de qualidade, oferecendo reforço escolar pe
 - Suporte a leitores de tela
 - Alto contraste e tamanhos de fonte ajustáveismidade com WCAG 2.1 (nível AA)
 - Navegação por teclado
-- Conformidade com WCAG 2.1 (nível AA)
-  O projeto suporta múltiplos idiomas. Os arquivos de tradução estão em `frontend/locales/`:
-
-## 🏗 Arquitetura (Free Tier - Custo R$ 0)
-
-````- en.json (Inglês)
-FRONTEND (Azure SWA)nhol)
-  HTML5 + CSS3 + JavaScript (Vanilla) - Deploy Automático- ind.json (Indígena)
       ▼
 BACKEND (Azure Functions)## Demonstração
-  • CadastroAluno     • AtualizarProgressoanding page demo com voz da Tia Dora:
-  • Gamificacao       • AdaptarConteudo[Demo Landing Page](https://marciogil.github.io/Amigo-do-Saber/tia-dora-landing.html)
-  • GerarExercicios   • AnalisarDesempenhodemonstração. A voz da Tia Dora está disponível apenas nesta página.
-      ▼
-COSMOS DB (NoSQL)   |   AZURE AI SERVICES
   • Alunos           |  • Azure OpenAI (Professora)[Repositório no GitHub](https://github.com/MarcioGil/Amigo-do-Saber)
   • Progresso        |  • AI Language (Bot Conselheiro)
   • Gamificação      |  • Translator (Inglês)
   • LogsDeUso        |  • Content Safety (Moderação)Veja o arquivo [ROADMAP.md](ROADMAP.md) para próximos passos e funcionalidades planejadas.
       ▼
 ANALYTICS (Power BI Desktop)## Licença
-
-
-
-
-
-
-
-
 
 
 
