@@ -97,6 +97,15 @@ npm install
 # Inicia as Azure Functions
 func start
 
+Frontend
+O Frontend estará disponível em http://localhost:8080.
+
+# Entra na pasta do Frontend
+cd frontend
+
+# Inicia o servidor HTTP
+npx http-server -p 8080
+
 Fantástico! Com os seus links, a seção "Sobre o Autor" está completa.
 
 Aqui está o código Markdown completo e final do seu README.md. Ele já está 100% formatado, com todos os seus links corretos e com o link de demonstração em destaque.
@@ -214,7 +223,6 @@ cd frontend
 # Inicia o servidor HTTP
 npx http-server -p 8080
 💬 Testar a Professora Virtual (Exemplo)
-PowerShell
 
 $body = @{
     alunoId = "teste123"
@@ -225,11 +233,11 @@ Invoke-RestMethod `
   -Method POST `
   -Body $body `
   -ContentType "application/json" | ConvertTo-Json
-🎬 Começando Rápido (Deploy para o Azure)
+
+  🎬 Começando Rápido (Deploy para o Azure)
 O deploy completo é automatizado via scripts e GitHub Actions.
 
 Opção 1: Setup Automatizado (Recomendado)
-Bash
 
 # Clona o repositório
 git clone [https://github.com/MarcioGil/Amigo-do-Saber.git](https://github.com/MarcioGil/Amigo-do-Saber.git)
@@ -245,6 +253,7 @@ cd Amigo-do-Saber
 git add .
 git commit -m "Initial deployment"
 git push origin main
+
 ✅ Pronto! Sua aplicação estará no ar em aproximadamente 15 minutos.
 
 🤝 Contribuindo
@@ -295,10 +304,10 @@ Márcio Gil Embaixador da Turma 14 do DIO Campus Expert, Estudante de Engenharia
 
 Conecte-se:
 
-💼 LinkedIn: linkedin.com/in/márcio-gil-1b7669309
+💼 LinkedIn: [Link para o seu LinkedIn]
 
-💻 GitHub (Perfil): github.com/MarcioGil/MarcioGil.git
+💻 GitHub: [Link para o seu GitHub]
 
-🌐 Portfólio/CV: marciogil.github.io/curriculum-vitae/
+🌐 Portfólio: [Link para o seu Portfólio]
 
-📁 Repositório do Projeto: github.com/MarcioGil/Amigo-do-Saber
+📁 Repositório do Projeto: [Link para o Repositório do Projeto]
